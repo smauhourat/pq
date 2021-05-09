@@ -26,5 +26,4 @@ namespace ProductQuoteApp.Library
             return description;
         }
     }
-
 }
