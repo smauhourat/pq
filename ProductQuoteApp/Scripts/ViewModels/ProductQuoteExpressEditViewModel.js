@@ -1524,32 +1524,6 @@
         //    });
         //}
 
-        function filterArrayWithAnother(array, resp)
-        {
-            console.log("    ");
-            console.log(resp);
-            console.log("---------------");
-            console.log(array);
-
-            var arrayRet = array;
-
-            var existe = false;
-            for (var j = 0; j < resp.length; j++) {
-                existe = false;
-                for (var i = 0; i < arrayRet.length; i++) {
-                    if (arrayRet[i].GeographicAreaID == resp[j].GeographicAreaID) {
-                        existe = true;
-                    }
-                }
-                if (!existe) {
-                    console.log("ADD:" + resp[j].Name);
-                    array.push(resp[j]);
-                }
-            }
-
-            return array;
-        }
-
         //self.selectedSaleModalityID.subscribe(function (saleModalityID) {
         //    if (saleModalityID !== undefined) {
         //        //$.ajax({
