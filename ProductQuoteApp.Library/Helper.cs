@@ -22,7 +22,5 @@ namespace ProductQuoteApp.Library
         {
             return RoundDecimal(value, 4);
         }
-
-
     }
 }
