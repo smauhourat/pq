@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Quimkong" />
+    <title>QuimKong | Home</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="~/assets/favicon/safari-pinned-tab.svg" color="#E01E24">
+    <meta name="msapplication-TileColor" content="white">
+    <meta name="theme-color" content="white">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/custom.css">
+
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hamburguer" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="~/"><img src="~/assets/svg/quimkong.svg" width="211" height="45" alt="QuimKong Brand"></a>
+                </div>
+                <div class="collapse navbar-collapse small-navbar" id="hamburguer">
+                    <ul class="nav navbar-nav" style="font-weight:normal">
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            if ((HttpContext.Current.User.IsInRole("CustomerUser") || HttpContext.Current.User.IsInRole("CustomerAdminUser") || HttpContext.Current.User.IsInRole("SellerUser")) && !(HttpContext.Current.User.IsInRole("AdminUser")))
+                            {
+                                <li>@Html.ActionLink("Cotizar", "Create", "ProductQuote")</li>
+                                if (HttpContext.Current.User.IsInRole("SellerUser"))
+                                {
+                                    <li>@Html.ActionLink("Cotizar EXP", "CreateExpress", "ProductQuote")</li>
+                                }
+                                <li>@Html.ActionLink("Mis Cotizaciones", "Index", "ProductQuote", new { pq = 1, customerID = 0, fechaDesde = "2021-01-01" }, null)</li>
+                                @*<li>@Html.ActionLink("Mis Ordenes de Compra", "Index", "ProductQuote", new { pq = 0, customerID = 0 }, null)</li>*@
+                            }
+                            if (HttpContext.Current.User.IsInRole("AdminUser"))
+                            {
+                                if (HttpContext.Current.User.IsInRole("SellerUser"))
+                                {
+                                    <li>@Html.ActionLink("Cotizar", "Create", "ProductQuote")</li>
+                                    <li>@Html.ActionLink("Cotizar EXP", "CreateExpress", "ProductQuote")</li>
+                                }
+                                <li>@Html.ActionLink("Cotizaciones", "Index", "ProductQuote", new { pq = 1, customerID = 0, fechaDesde = "2021-01-01" }, null)</li>
+                                @*<li>@Html.ActionLink("OC", "Index", "ProductQuote", new { pq = 0, customerID = 0 }, null)</li>*@
+                                <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyCustomers, "Index", "Customer")</li>
+                                <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyProducts, "Index", "Product")</li>
+                                <li class="dropdown">
+                                    <a tabindex="0" data-toggle="dropdown" data-submenu>
+                                        Administración<span class="caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Parámetros", "../GlobalVariable/Edit", new { id = 0 })</li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyProviders, "Index", "Provider")</li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>@Html.ActionLink("Excepciones de Precios", "Index", "WayOfException")</li>
+                                        <li>@Html.ActionLink("Razones de Vencimiento de OC", "Index", "DueDateReason")</li>
+                                        <li>@Html.ActionLink("Motivos Cierre Cotizacion", "Index", "ReasonsForClosure")</li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyPaymentDeadline, "Index", "PaymentDeadline")</li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyCreditRating, "Index", "CreditRating")</li>
+                                        <li>@Html.ActionLink("Márgenes por Modalidad de Venta y Clasificación Crediticia", "Index", "SaleModalityCreditRating")</li>
+                                        <li>@Html.ActionLink("Plazo de Pago por Clasificación Crediticia", "Index", "CreditRatingPaymentDeadline")</li>
+                                        <li>@Html.ActionLink("ROFEX", "Index", "Rofex")</li>
+                                        <li>@Html.ActionLink("Tratamiento IIBB", "Index", "IIBBTreatment")</li>
+                                        <li role="separator" class="divider"></li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyPackagings, "Index", "Packaging")</li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyGeographicAreas, "Index", "GeographicArea")</li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyTransportTypes, "Index", "TransportType")</li>
+                                        <li>@Html.ActionLink(@ProductQuoteApp.Resources.Resources.EtyFreightTypes, "Index", "FreightType")</li>
+                                        <li>@Html.ActionLink("Costos de Transporte por Lugar de Entrega", "Index", "GeographicAreaTransportType")</li>
+                                        
+                                        @if (HttpContext.Current.User.IsInRole("SuperAdminUser"))
+                                        {
+                                            <li role="separator" class="divider"></li>
+                                            <li>@Html.ActionLink("Usuarios Administradores", "Index", "AdminUser")</li>
+                                            <li>@Html.ActionLink("Usuarios Vendedores", "Index", "SellerUser")</li>
+                                            <li>@Html.ActionLink("Negocios", "Index", "SalesChannel")</li>
+                                            <li>@Html.ActionLink("Cuentas", "Index", "EmailAccount")</li>
+                                        }                                        
+                                    </ul>
+                                </li>
+                            }
+                        }
+                    </ul>
+
+                    @Html.Partial("_LoginPartial")
+
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+    </header><!-- header -->
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    <div id="footer">
+        <div class="container">
+            <p class="muted credit footer">&copy; @DateTime.Now.Year - QUIMKONG - v2.1.0.0</p>
+            @*@Session.Timeout*@
+        </div>
+    </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $("[rel=tooltip]").tooltip({ html: true });
+    });
+    </script>
+
+    <script type="application/javascript" src="//script2.chat-robot.com/?token=d75c4cf58f99a841096288574032f22b"></script>
+</body>
+</html>

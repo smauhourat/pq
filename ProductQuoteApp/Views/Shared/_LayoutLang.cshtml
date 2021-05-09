@@ -1,0 +1,33 @@
+﻿@{
+    var culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.ToLowerInvariant();
+}
+@helper selected(string c, string culture)
+{
+if (c == culture)
+{
+        @:checked="checked"
+    }
+}
+
+@using (Html.BeginForm("SetCulture", "Home"))
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            <div>
+                <label for="en-us">
+                    <input name="culture" id="en-us" value="en-us" type="radio" @selected("en-us", culture) onclick="submit();" /> English
+                </label>
+            </div>
+        </li>
+
+        <li>
+            <div>
+                <label for="es">
+                    <input name="culture" id="es" value="es" type="radio" @selected("es", culture) onclick="submit();" /> Español
+                </label>
+            </div>
+        </li>
+
+    </ul>
+
+}

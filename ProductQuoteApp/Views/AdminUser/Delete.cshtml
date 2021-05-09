@@ -1,0 +1,45 @@
+﻿@model ProductQuoteApp.Models.RegisterEditAdminUserViewModel
+@{
+    ViewBag.Title = "Eliminar Usuario Administrador";
+}
+
+<!--<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete Usuario Administrador</h3>
+<div>
+    <hr />
+    @Html.ValidationMessage("ERROR_MSG", new { @class = "text-danger" })
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName )
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>

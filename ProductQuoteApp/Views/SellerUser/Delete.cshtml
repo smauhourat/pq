@@ -1,0 +1,45 @@
+﻿@model ProductQuoteApp.Models.RegisterDeleteSellerUserViewModel 
+
+@{
+    ViewBag.Title = "Eliminar Usuario";
+}
+
+<!--<h2>ProductQuoteApp.Resources.Resources.Details</h2>-->
+@using (Html.BeginForm("Delete", "SellerUser", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+<div>
+    <h3>Esta usted seguro de eliminar el Usuario?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+    </dl>
+</div>
+<p>
+    <input type="submit" value="Eliminar" class="btn btn-default" /> |
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>
+}

@@ -1,0 +1,721 @@
+﻿@model ProductQuoteApp.Models.CustomerOrderViewModel
+
+@{
+    ViewBag.Title = "Detalle Orden de Compra";
+}
+
+@*<h2>Details</h2>*@
+
+<div>
+    <h3>Orden de Compra</h3>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>
+            Código
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerOrderCodeNew)
+        </dd>
+
+        <dt>
+            Fecha Creación
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOrderView)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ApprovedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ApprovedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RejectedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RejectedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CustomerOrderStatus.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerOrderStatus.Description)
+        </dd>
+    </dl>
+    <hr />
+    
+        <span style="display: inline;">
+            @using (Html.BeginForm("Delete", "CustomerOrders", new { pq = ViewBag.Pq, id = Model.ProductQuoteID }, FormMethod.Post, new { @style= "display: inline;", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+                {
+                    <input type="submit" value="Eliminar" class="btn btn-default" />
+                }   
+
+            }
+
+            @using (Html.BeginForm("Approve", "CustomerOrders", new { pq = ViewBag.Pq, productQuoteID = Model.ProductQuoteID }, FormMethod.Post, new { @style = "display: inline;", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+                {
+                    if ((Model.CustomerOrderStatus.CustomerOrderStatusID == 1) || (Model.CustomerOrderStatus.CustomerOrderStatusID == 3))
+                    {
+                        <input type="submit" value="Aprobar" class="btn btn-default" />
+
+                    }
+                }
+            }
+
+            @using (Html.BeginForm("Reject", "CustomerOrders", new { pq = ViewBag.Pq, productQuoteID = Model.ProductQuoteID }, FormMethod.Post, new { @style = "display: inline;", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+                {
+                    if ((Model.CustomerOrderStatus.CustomerOrderStatusID == 1) || (Model.CustomerOrderStatus.CustomerOrderStatusID == 2))
+                    {
+                        <input type="submit" value="Rechazar" class="btn btn-default" />
+
+                    }
+                }
+            }
+            <br /><br />
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "../ProductQuote", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID })
+        </span>
+</div>
+<br /><br />
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser") || Model.ProductQuote.CanShowCosteo == true)
+            {
+    <div class="col-md-12">
+        <div class="col-md-12">
+            <div class="panel-group">
+                <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingFive">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">Detalle del Costeo</a>
+                        </h4>
+                    </div><!-- row -->
+                    <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+                        <div class="panel-body table-responsive">
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 43%">
+                                    <col style="width: 10%">
+                                    <col style="width: 11%">
+                                    <col style="width: 18%">
+                                    <col style="width: 18%">
+                                    @*<col style="width: 18%">*@
+                                </colgroup>
+                                <tr class="gris">
+                                    <th>CONCEPTO</th>
+                                    <th>ORIGEN</th>
+                                    <th>VALOR</th>
+                                    <th>PRECIO UNI. (USD/KG)</th>
+                                    <th>ENTREGA (USD)</th>
+                                    @*<th>ORDEN COMPRA (USD)</th>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Cantidad (Kg.)</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="colGreen">1</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.MinimumQuantityDelivery)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.QuantityOpenPurchaseOrder)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo del Producto (USD)</td>
+                                    <td class="colText">PRODUCTO</td>
+                                    <td></td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.CostoProducto_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CostoProducto_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.CostoProducto_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Flete a Cliente (ARS)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.Flete_PorITEM)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Flete_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Flete_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.Flete_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Almacenamiento (ARS/MES/Posicion)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoCosto_PorITEM)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoCosto_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoCosto_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoCosto_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">IN/OUT (ARS/Posicion)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.Inout_PorITEM)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Inout_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Inout_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.Inout_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Mermas (% sobre costo Producto)</td>
+                                    <td class="colText">PRODUCTO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.Merma_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Merma_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Merma_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.Merma_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Comisiones (% sobre precio)</td>
+                                    <td class="colText">CLIENTE</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.Comisiones_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Comisiones_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Comisiones_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.Comisiones_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Gastos Fijos (% sobre precio)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.GastosFijos_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GastosFijos_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GastosFijos_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.GastosFijos_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo Financiero (% sobre precio)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo Seguro Cambiario (% sobre precio)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.ExchangeInsurance)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ExchangeInsurance_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ExchangeInsurance_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.ExchangeInsurance_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">IIBB (% sobre precio)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.IIBBAlicuota_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IIBBAlicuota_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IIBBAlicuota_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.IIBBAlicuota_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td class="colText">Impuesto D/C (% sobre precio)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td class="colGreen">@Html.DisplayFor(model => model.ProductQuote.ImpuestoDC_PorITEM)%</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ImpuestoDC_PorTON)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ImpuestoDC_PorEntrega)</td>
+                                    @*<td>@Html.DisplayFor(model => model.ProductQuote.ImpuestoDC_PorOC)</td>*@
+                                </tr>
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow"><strong>COSTO TOTAL</strong></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow">@Html.DisplayFor(model => model.ProductQuote.CustomerTotalCost)</td>
+                                    <td class="colLightYellow">@Html.DisplayFor(model => model.ProductQuote.CustomerTotalCost_PorEntrega)</td>
+                                    @*<td class="colLightYellow">@Html.DisplayFor(model => model.ProductQuote.CustomerTotalCost_PorOC)</td>*@
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    @*<td></td>*@
+                                </tr>
+                                <tr class="gris">
+                                    <td class="colText colYellow"><strong>CALCULO INICIAL</strong></td>
+                                    <td class="colGreen colYellow"></td>
+                                    <td class="colText colYellow"></td>
+                                    <td class="colText colYellow"></td>
+                                    <td class="colText colYellow"></td>
+                                    @*<td class="colText colYellow"></td>*@
+                                </tr>
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow"><strong>Precio de Venta (USD/Kg)</strong></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colGreen"><strong>@Html.DisplayFor(model => model.ProductQuote.PriceOriginal)</strong></td>
+                                    <td class="colGreen"><strong>@Html.DisplayFor(model => model.ProductQuote.PriceOriginal_PorEntrega)</strong></td>
+                                    @*<td class="colGreen"><strong>@Html.DisplayFor(model => model.ProductQuote.PriceOriginal_PorOC)</strong></td>*@
+                                </tr>
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow"><strong>Margen Neto (USD)</strong></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalUSD_PorTON)</strong></td>
+                                    <td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalUSD_PorEntrega)</strong></td>
+                                    @*<td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalUSD_PorOC)</strong></td>*@
+                                </tr>
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow"><strong>Margen Neto (%)</strong></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalPorc_PorTON)%</strong></td>
+                                    <td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalPorc_PorEntrega)%</strong></td>
+                                    @*<td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.MargenNetoOriginalPorc_PorOC)%</strong></td>*@
+                                </tr>
+
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow"><strong>ROI (%)</strong></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colLightYellow"><strong>@Html.DisplayFor(model => model.ProductQuote.WorkingCapitalROI)%</strong></td>
+                                    <td></td>
+                                    @*<td></td>*@
+                                </tr>
+                                @*<tr class="gris-50">
+                                    <td class="colText colLightYellow">Margenes Utilizados</td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colText colLightYellow" colspan="2">@Html.DisplayFor(model => model.ProductQuote.MargenNetoEntidadOrigen)</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr class="gris-50">
+                                    <td class="colText colLightYellow">Tiene Excepción </td>
+                                    <td class="colLightYellow"></td>
+                                    <td class="colText colLightYellow" colspan="2">@Html.DisplayFor(model => model.ProductQuote.CaptionWayOfException)</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>*@
+                            </table>
+                            <!--INPUT DEL CLIENTE-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 45%">
+                                    <col style="width: 20%">
+                                </colgroup>
+                                <tr class="gris">
+                                    <th>INPUT DEL CLIENTE</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Producto</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ProductName)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Es Compra-Venta Directa?</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ProductBuyAndSellDirect_Desc)</td>
+                                    <td></td>
+                                </tr>
+                                @*<tr>
+                                    <td class="colText">Modalidad Venta</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.SaleModalityName)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsSaleModalityFindParam_View)</td>
+                                </tr>*@
+                                @*<tr>
+                                    <td class="colText">Lugar de entrega</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GeographicAreaName)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsGeographicAreaFindParam_View)</td>
+                                </tr>*@
+                                <tr>
+                                    <td class="colText">Condición de Pago</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.PaymentDeadlineName)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsPaymentDeadlineFindParam_View)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Cantidad Total Orden de Compra (Kg) </td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.QuantityOpenPurchaseOrder)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsQuantityOpenPurchaseOrderFindParam_View)</td>
+                                </tr>
+                                @*<tr>
+                                    <td class="colText">Cantidad de Entregas</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.DeliveryAmount)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsDeliveryAmountFindParam_View)</td>
+                                </tr>*@
+                                @*<tr>
+                                    <td class="colText">Cantidad Minima por Entrega (Kg)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.MinimumQuantityDelivery)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsMinimumQuantityDeliveryFindParam_View)</td>
+                                </tr>*@
+                                @*<tr>
+                                    <td class="colText">Máximo Tiempo en Stock (Meses)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.MaximumMonthsStock)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsMaximumMonthsStockFindParam_View)</td>
+                                </tr>*@
+                                @*<tr>
+                                    <td class="colText">Moneda de la Operación </td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ExchangeTypeName)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IsExchangeTypeFindParam_View)</td>
+                                </tr>*@
+                            </table>
+                            <!--PARAMETROS DEL SISTEMA-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 20%">
+                                    <col style="width: 45%">
+                                </colgroup>
+                                <tr class="gris">
+                                    <th>PARAMETROS DEL SISTEMA</th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo Almacenamiento (ARS/Mes/Posición)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_CostoAlmacenamientoMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo IN-OUT (ARS/Posición)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Inout_PorITEM)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo Financiero (TEM %)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_CostoFinancieroMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Impuesto Débito/Crédito (%)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ImpuestoDC_PorITEM)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Gastos Fijos (%)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GastosFijos_PorITEM)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">IIBB Alícuota (%)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.IIBBAlicuota_PorITEM)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Tipo Cambio (ARS/USD)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.TypeChange)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Factor Tiempo en Stock</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_FactorCostoAlmacenamientoMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Días Stock Promedio Dist. Local</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_DiasStockPromedioDistLocal)</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <!--CALCULO FLETE-->
+                            @*<table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+
+                                <tr class="gris">
+                                    <th>CALCULO FLETE</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>Flete a Cliente (USD/Kg)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.Flete_PorTON)</strong></td>
+                                    <td class="colText">[Flete a Cliente (USD por entrega)] / [Cantidad Minima de Entrega (Kg)]</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Flete a Cliente (ARS por Orden de Compra)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Flete_PorITEM)</td>
+                                    <td class="colText">@Html.DisplayFor(model => model.ProductQuote.LeyendaCalculoCostoTransporte)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Flete a Cliente (USD por Orden de Compra)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Flete_PorITEMUSD)</td>
+                                    <td class="colText">[Flete a Cliente (ARS por Orden de Compra)] / [Tipo de Cambio (ARS/USD)]</td>
+                                </tr>
+
+                                <tr>
+                                    <td class="colText">Tipo de Carga</td>
+                                    <td class="colText">PRODUCTO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.FreightType)</td>
+                                    <td></td>
+                                </tr>
+                            </table>*@
+                            <!--CALCULO ALMACENAMIENTO-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+
+                                <tr class="gris">
+                                    <th>CALCULO ALMACENAMIENTO</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>Almacenamiento (USD/Kg)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoUSDKg)</strong></td>
+                                    <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30 / [Tipo Cambio (ARS/USD)] / 1000</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo Almacenamiento (ARS/Mes/Posición)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_CostoAlmacenamientoMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Tiempo Medio en Stock (Días)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.TiempoMedioStockDias)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Almacenamiento (ARS/Posición)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoARS)</td>
+                                    <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Almacenamiento (USD/Posición)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.AlmacenamientoUSD)</td>
+                                    <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30 / [Tipo Cambio (ARS/USD)]</td>
+                                </tr>
+                            </table>
+                            <!--CALCULO IN/OUT-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+
+                                <tr class="gris">
+                                    <th>CALCULO IN/OUT</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>IN/OUT (USD/Kg)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.Inout_USDKg)</strong></td>
+                                    <td class="colText">[Costo IN-OUT (ARS/Kg)] / [Tipo Cambio (ARS/USD)] / 1000</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Costo IN-OUT (ARS/Kg)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Inout_PorITEM)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">IN/OUT (USD/Posición)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.Inout_USD)</td>
+                                    <td class="colText">[Costo IN-OUT (ARS/Kg)] / [Tipo Cambio (ARS/USD)]</td>
+                                </tr>
+                            </table>
+                            <!--CALCULO FINANCIACIÓN-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+
+                                <tr class="gris">
+                                    <th>CALCULO FINANCIACIÓN</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>Costo Financiero (% sobre precio)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorITEM)</strong></td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CostoFinancieroMensual_PorITEM_Formula)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Capital de Trabajo (Días)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.WorkingCapital)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.WorkingCapital_Formula)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Costo Financiero (TEM %)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_CostoFinancieroMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
+                                <tr>
+                                    <td class="colText"><strong>Capital de Trabajo (Días)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.WorkingCapital)</strong></td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.WorkingCapital_Formula)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Plazo Pago Proveedor (Días desde Factura)</td>
+                                    <td class="colText">PRODUCTO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ProductProviderPaymentDeadline)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Lead Time (Días desde Factura)</td>
+                                    <td class="colText">PRODUCTO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ProductLeadTime)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Tiempo Medio en Stock (Días)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.TiempoMedioStockDias)</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.TiempoMedioStockDias_Formula)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Condición de Pago (Días desde Factura)</td>
+                                    <td class="colText">INPUT</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.PaymentDeadlineDays)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Promedio de Atraso en el Pago (Días)</td>
+                                    <td class="colText">CLIENTE</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CustomerDelayAverageDays)</td>
+                                    <td class="colText"></td>
+                                </tr>
+                                <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
+                                <tr>
+                                    <td class="colText"><strong>Tiempo Medio en Stock (Días)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.TiempoMedioStockDias)</strong></td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.TiempoMedioStockDias_Formula)</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Máximo Tiempo en Stock (Días)</td>
+                                    <td class="colText">INPUT</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.MaximoTiempoStockDias)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Factor Tiempo en Stock</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_FactorCostoAlmacenamientoMensual)</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Stock Promedio Dist. Local (Días)</td>
+                                    <td class="colText">SISTEMA</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.GV_DiasStockPromedioDistLocal)</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                            <!--CALCULO COSTO SEGURO CAMBIARIO-->
+                            @*<table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+                                <tr class="gris">
+                                    <th>CALCULO COSTO SEGURO CAMBIARIO</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>Costo Seguro Cambiario (% sobre precio)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.ExchangeInsurance)</strong></td>
+                                    <td class="colText">SI PESOS => 1 - [Tipo Cambio (ARS/USD)] / [ROFEX (Condición de Pago + Promedio de Atraso en el Pago Días)]</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Condición de Pago (Días desde Factura)</td>
+                                    <td class="colText">INPUT</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.PaymentDeadlineDays)</td>
+                                    <td class="colText"></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">Promedio de Atraso en el Pago (Días)</td>
+                                    <td class="colText">CLIENTE</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.CustomerDelayAverageDays)</td>
+                                    <td class="colText"></td>
+                                </tr>
+                                <tr>
+                                    <td class="colText">ROFEX (Condición de Pago + Promedio de Atraso en el Pago Días)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.ValorRofex)</td>
+                                    <td class="colText">Busca [ROFEX] según [Condicion de Pago] + Promedio de Atraso en el Pago Dias</td>
+                                </tr>
+                            </table>*@
+                            <!--CALCULO ROI-->
+                            <table class="table table-hover table-condensed">
+                                <colgroup>
+                                    <col style="width: 35%">
+                                    <col style="width: 10%">
+                                    <col style="width: 20%">
+                                    <col style="width: 35%">
+                                </colgroup>
+
+                                <tr class="gris">
+                                    <th>CALCULO ROI</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td class="colText"><strong>Rentabilidad del Capital de Trabajo (ROI %)</strong></td>
+                                    <td class="colText"><strong>CALCULO</strong></td>
+                                    <td><strong>@Html.DisplayFor(model => model.ProductQuote.WorkingCapitalROI)</strong></td>
+                                    <td>[Margen Operativo (% sobre Precio)] * [Rotación del Capital de Trabajo]</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Margen Operativo (%)</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.MargenBrutoPORCRofex)</td>
+                                    <td>[Margen Neto (%)] + [Costo Financiero (% sobre precio)]</td>
+                                </tr>
+                                <tr>
+                                    <td class="colText"> - Rotación del Capital de Trabajo</td>
+                                    <td class="colText">CALCULO</td>
+                                    <td>@Html.DisplayFor(model => model.ProductQuote.WorkingCapitalRotation)</td>
+                                    <td>360 (días) / [Capital de Trabajo (Días)]</td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

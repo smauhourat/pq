@@ -1,0 +1,65 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.LogRecord>
+
+@{
+    ViewBag.Title = "Log Actividad";
+}
+
+<h3>Log Actividad</h3>
+
+<style type="text/css">
+    .Celda {
+        font-size: 12px;
+        font-style:initial;
+    }
+    .red {
+        color: red;
+    }
+    .white {
+        color: white;
+    }
+</style>
+
+<table class="table">
+    <tr>
+        <th>
+            Nivel
+        </th>
+        <th>
+            Mensaje
+        </th>
+        <th>
+            Fecha
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td class="Celda">
+            @if (item.LogLevel == ProductQuoteApp.Persistence.LogLevel.Error)
+            {
+                <div style="font-size:2em; display: inline-block;"><i class='fa fa-exclamation-triangle red'></i></div>
+            }
+            else if (item.LogLevel == ProductQuoteApp.Persistence.LogLevel.Information)
+            {
+                <div style="font-size:2em; display: inline-block;"><i class='fa fa-info-circle'></i></div>
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.LogLevel)
+            }
+        </td>
+        <td class="Celda">
+            @Html.DisplayFor(modelItem => item.ShortMessage)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedOnUtc)
+        </td>
+        <td>
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDetails, "Details", new { id=item.LogRecordID }) |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDelete, "Delete", new { id=item.LogRecordID })
+        </td>
+    </tr>
+}
+
+</table>

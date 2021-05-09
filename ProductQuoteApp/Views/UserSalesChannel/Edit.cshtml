@@ -1,0 +1,108 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Asignación de Negocios a Usuarios";
+}
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/knockout.validation.min.js"></script>
+<script src="~/Scripts/knockout.custom.bindings.js?0.8.0.41"></script>
+
+<style>
+    .c1{ 
+        background-color: transparent;
+        cursor: default;
+    } 
+    .c1:hover { 
+        background-color: lightgray;
+        cursor: pointer;
+    } 
+    div.ex3 {
+        width: 100%;
+        height: 510px;
+        overflow: auto;
+    }
+</style>
+
+
+<!--<h2></h2>-->
+
+<h3>Negocios por Usuario: @ViewBag.UserName</h3>
+<br />
+<div>
+    @{
+        string returnUrl = @ViewBag.returnUrl;
+    }
+
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, returnUrl)
+</div>
+
+<input type="hidden" id="myHDUserID" value="@ViewBag.UserID" />
+<input type="hidden" id="myHDUserName" value="@ViewBag.UserName" />
+
+<table class="table">
+    <tr>
+        <td style="width:45%">
+            <div class="ex3">
+                <div class="control-group">
+                    <div class="controls form-inline">
+                        <input class="form-control" data-bind="value: Query1, valueUpdate: 'keyup'" autocomplete="off" title="Buscador de Negocios">
+                        <input type="button" value="Eliminar Todos" data-bind="click: function() {$root.deleteAllSalesChannelByUser();}, enable: assignedSalesChannelsList().length>0" class="btn btn-default" />
+                    </div>
+                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <strong>Negocios Asignados</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:assignedSalesChannelsListFiltered">
+                        <tr class="c1" title="Doble Click para quitar el Canal" data-bind="click: { single: function() { return null; }, double: function() { $root.desassignSalesChannelToUser($data.SalesChannelUserID) }}">
+                            <td> <span data-bind="text:SalesChannelName"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+        <td style="width:10%" align="center">
+            <table border="0">
+                <tr>
+                    <td>
+                        <ul class="pagination2">
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="width:45%">
+            <div class="ex3">
+                <div class="control-group">
+                    <div class="controls form-inline">
+                        <input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off" title="Buscador de Canales Disponibles">
+                        <input type="button" value="Asignar Todos" data-bind="click: function() {$root.addAllSalesChannelsToUser();}, enable: availableSalesChannelsListFiltered().length>0" class="btn btn-default" />
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <strong>Negocios Disponibles</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:availableSalesChannelsListFiltered">
+                        <tr class="c1" title="Doble Click para agregar el Negocio" data-bind="click: { single: function() { return null; }, double: function() { $root.assignSalesChannelToUser($data) }}">
+                            <td></td>
+                            <td> <span data-bind="text:FullName"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+<script src="~/Scripts/ViewModels/SalesChannelUserViewModel.js"></script>

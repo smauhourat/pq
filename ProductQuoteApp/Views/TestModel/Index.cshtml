@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.TestModel>
+
+@{
+    ViewBag.Title = "";
+}
+
+<h3>Lista</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActEdit, "Edit", new { id = item.Id }) |
+                @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDetails, "Details", new { id = item.Id }) |
+                @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDelete, "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

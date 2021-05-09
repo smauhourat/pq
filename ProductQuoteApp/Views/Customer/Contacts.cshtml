@@ -1,0 +1,62 @@
+﻿@model ProductQuoteApp.Models.CustomerContactViewModel
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyContacts;
+}
+
+<!--<h2></h2>-->
+
+
+<h3>Contactos del Cliente: @Model.CustomerName </h3>
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "ContactsCreate", "Customer", new { customerID = Model.CustomerID }, null)
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @ProductQuoteApp.Resources.Resources.EtyCustomer
+        </th>*@
+        <th nowrap>
+            Fecha Contacto
+        </th>
+        <th>
+            Detalle
+        </th>
+        <th>
+            Tipo
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model.Contacts.OrderByDescending(c => c.DateContact)) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => modelItem.CustomerName)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.DateContact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactType.Description)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "ContactsEdit", "Customer", new { customerID = Model.CustomerID, contactID = item.ContactID }, null) |
+            @Html.ActionLink("Eliminar", "ContactsDelete", "Customer", new { customerID = Model.CustomerID, contactID = item.ContactID }, null)
+        </td>
+        @*<td>
+            @Html.ActionLink("Resetear Contraseña", "UserSetPassword", "Customer", new { customerID = Model.CustomerID, id = item.Id }, null) |
+            @Html.ActionLink("Editar", "UsersEdit", "Customer", new { customerID = Model.CustomerID, userId = item.Id }, null) |
+            @Html.ActionLink("Eliminar", "UserDelete", "Customer", new { customerID = Model.CustomerID, id = item.Id }, null)
+        </td>*@
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>

@@ -1,0 +1,79 @@
+﻿@model ProductQuoteApp.Persistence.EmailAccount
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!--<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete Cuentas</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Host)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Host)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Port)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Port)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EnableSsl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnableSsl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UseDefaultCredentials)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UseDefaultCredentials)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDefault)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDefault)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>

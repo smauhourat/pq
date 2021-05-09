@@ -1,0 +1,107 @@
+﻿@model ProductQuoteApp.Models.CustomerProductViewModel
+
+@{
+    ViewBag.Title = "Asignación de Productos a Clientes";
+}
+
+<!--<h2></h2>-->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<h3>Productos del Cliente: </h3>
+
+<p>
+    <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActSave class="btn btn-default" />
+</p>
+<p>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.CustomerID)
+</p> 
+<table class="table">
+    <tr>
+        <td style="width:40%">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.CheckBox("CheckAllAssigned")
+                    </th>
+                    <th>
+                        Producto
+                    </th>
+                    <th>
+                        Costeo
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                @foreach (var item in Model.AssignedProducts)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBox("CheckAssigned")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.FullName)
+                        </td>
+                        <td>
+                            @Html.EditorFor(modelItem => item.CalculationDetails)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        </td>
+        <td style="width:20%" align="center" valign="center">
+            <table border="0">
+                <tr style="align:center">
+                    <td style="align:center">
+                        <ul class="pagination2">
+                            <li class="active"><a>></a></li>
+                            <li class="active"><a><</a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="width:40%">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.CheckBox("CheckAllAvailable")
+                    </th>
+                    <th>
+                        Producto
+                    </th>
+                    <th>
+
+                    </th>
+                </tr>
+                @foreach (var item in Model.AvailableProducts)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBox("CheckAvailable")
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FullName)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        </td>
+    </tr>
+</table>
+
+}
+
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

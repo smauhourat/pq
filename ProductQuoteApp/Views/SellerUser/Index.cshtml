@@ -1,0 +1,42 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.SellerUser>
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyUsers;
+}
+
+<h3>Usuarios Vendedores Internos</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Nombre
+        </th>
+
+        <th>
+            @ProductQuoteApp.Resources.Resources.PtyEmail
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+             @Html.DisplayFor(modelItem => item.FirstName) @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.ActionLink("Resetear Contraseña", "ResetPassword", new { id = item.Id, userName = item.FirstName + "," + item.LastName + " (" + item.Email + ")" }, null) |
+            @Html.ActionLink("Negocios", "../UserSalesChannel/Edit", new { userid = item.Id, returnUrl="../SellerUser" }) |
+            @Html.ActionLink("Editar", "Edit", new { userId = item.Id }) |
+            @Html.ActionLink("Eliminar", "Delete", new { userid = item.Id })
+            
+        </td>
+    </tr>
+}
+
+</table>

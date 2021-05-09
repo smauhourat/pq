@@ -1,0 +1,38 @@
+﻿@model ProductQuoteApp.Persistence.Rofex
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!---<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete @ProductQuoteApp.Resources.Resources.EtyRofexs</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Days)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Days)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DollarQuotation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DollarQuotation)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>

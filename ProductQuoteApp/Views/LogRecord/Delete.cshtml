@@ -1,0 +1,49 @@
+﻿@model ProductQuoteApp.Persistence.LogRecord
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!--<h2>@ProductQuoteApp.Resources.Resources.ActDelete</h2>-->
+
+<div>
+    <h3>Log</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nivel
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogLevel)
+        </dd>
+
+        <dt>
+            Fecha
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOnUtc)
+        </dd>
+
+        <dt>
+            Mensaje
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.ShortMessage)*@
+            @Html.TextAreaFor(model => model.ShortMessage, new { @class = "form-control", @rows = "7", @cols = "25", @readonly = "readonly" })
+        </dd>
+
+    </dl>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>
+

@@ -1,0 +1,184 @@
+﻿@model ProductQuoteApp.Persistence.ShipmentTracking 
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActEdit;
+}
+
+<!--<h2>View</h2>-->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>Seguimiento Cotización</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductQuoteID)
+
+        <div class="row">
+            <div class="col-xs-2"><strong></strong></div>
+            <div class="col-xs-2"><strong>Fecha Estimada</strong></div>
+            <div class="col-xs-2"><strong>Fecha Real</strong></div>
+            <div class="col-xs-2"><strong>Completada</strong></div>
+            <div class="col-xs-2"><strong>Habilitada</strong></div>
+        </div>
+
+        <div class="row">
+            <hr />
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Cotizado</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.QuotedEstimatedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.QuotedEstimatedDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.QuotedEstimatedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.QuotedEstimatedDate, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.QuotedCompleted, new { htmlAttributes = new { @onclick = "return false" } })
+            </div>
+            <div class="col-xs-2">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Orden de Compra</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.CustomerOrderEstimatedDate, new { htmlAttributes = new { @class = "form-control", @readonly="readonly" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.CustomerOrderRealDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.CustomerOrderCompleted, new { htmlAttributes = new { @onclick = "return false" } })
+            </div>
+            <div class="col-xs-2">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Aprobado</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ApprovedEstimatedDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ApprovedRealDate, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ApprovedCompleted, new { htmlAttributes = new { @onclick = "return false" } })
+            </div>
+            <div class="col-xs-2">&nbsp;</div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>En Px</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.InProductionEstimatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.InProductionRealDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.InProductionCompleted)
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.InProductionEnabled)
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Embarcado ETD</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETDEstimatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETDRealDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETDCompleted)
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETDEnabled)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Puerto ETA</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETAEstimatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETARealDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETACompleted)
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.ETAEnabled)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Nacionalizado</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.NationalizedEstimatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.NationalizedRealDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.NationalizedCompleted)
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.NationalizedEnabled)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-2">
+                <label>Entregado</label>
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.DeliveredEstimatedDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.DeliveredRealDate, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+            <div class="col-xs-2">
+                @Html.EditorFor(model => model.DeliveredCompleted)
+            </div>
+            <div class="col-xs-2">&nbsp;</div>
+        </div>
+
+        <div class="row">
+            &nbsp;
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActSave class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> 
+}
+
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "../ProductQuote", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID })
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "Plazos de Pagos por Clasificacion Crediticia";
+}
+
+
+<style>
+.selected { background-color: lightgray; }
+
+</style>
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/knockout.validation.min.js"></script>
+<!--<h1>Costos Transporte</h1>-->
+
+<div class="row" style="margin-bottom:25px;">
+    <h3>Plazos de Pagos por Clasificacion Crediticia</h3>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <strong>Clasificaciones Crediticias</strong>
+            </td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:CreditRatings">
+        <tr class="c1" data-bind="click:$root.openDetailsDialog, css: { selected: $root.isSelected($data)}">
+            <td> <span data-bind="text:Description"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div id="detailcontainer">
+    <strong>Plazos de Pago : <span data-bind="text:Description"></span></strong>
+    <hr/>
+    <div id="dvtablecontainer">  <!--data-bind="visible: PaymentDeadlines().length>0">-->
+        <div data-bind="validationElement: paymentDeadlineList"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="width: 370px">
+                        <strong>Plazo de Pago</strong> 
+                    </td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: template, foreach: PaymentDeadlines }"></tbody>
+        </table>
+    </div>
+
+    <table class="table">
+        <thead>
+            <tr data-bind="visible: showAddPaymentDeadline">
+                <td><select data-bind="options: paymentDeadlineList, optionsText: 'Description', optionsValue: 'PaymentDeadlineID', value: selectedPaymentDeadlineID, optionsCaption: 'Seleccione un Plazo ...'" size="1" style="width: 370px" class="form-control"></select></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="width: 370px" ></td>
+                <td>
+                    <button data-bind="click: $root.addPaymentDeadline, visible: !showAddPaymentDeadline() && !showEditPaymentDeadline() && masterGridSelected()" class="btn btn-default">Agregar</button>
+                    <button data-bind="click: $root.saveAddPaymentDeadline, visible: showAddPaymentDeadline" class="btn btn-default">Grabar</button>
+                    <button data-bind="click: $root.cancelAddPaymentDeadline,  visible: showAddPaymentDeadline" class="btn btn-default">Cancelar</button>
+                </td>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+<script type="text/html" id="TemplateA">
+    @*  <table>*@
+    <tr>
+        <td> <span data-bind="text:PaymentDeadlineDescription"></span></td>
+        <td> <button data-bind="click: function() { $root.deletePaymentDeadline($data); }" class="btn btn-default">Eliminar</button></td>
+    </tr>
+    @* </table>*@
+</script>
+
+<script type="text/html" id="TemplateB">
+    @* <table>*@
+    <tr>
+        <td> <span data-bind="text:PaymentDeadlineDescription"></span></td>
+        <td></td>
+    </tr>
+    @* </table>*@
+</script>
+
+<script src="~/Scripts/ViewModels/CreditRatingPaymentDeadline.js"></script>

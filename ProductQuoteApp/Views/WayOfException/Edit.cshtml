@@ -1,0 +1,402 @@
+﻿@model ProductQuoteApp.Persistence.WayOfException
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActEdit;
+}
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>Excepcion</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.WayOfExceptionID)
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Excepción</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("CustomerID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1" checked disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ProductID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("ProductID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck2" checked disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label col-md-12">Capacidad FCL (Kg.)</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input class="form-control" name="FCLProduct" id="FCLProduct" readonly="readonly" type="text" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.SaleModalityID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("SaleModalityID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.SaleModalityID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsSaleModalitySearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.GeographicAreaID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("GeographicAreaID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.GeographicAreaID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsGeographicAreaSearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.PaymentDeadlineID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("PaymentDeadlineID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PaymentDeadlineID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsPaymentDeadlineSearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.QuantityOpenPurchaseOrder, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.QuantityOpenPurchaseOrder, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                                @Html.ValidationMessageFor(model => model.QuantityOpenPurchaseOrder, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsQuantityOpenPurchaseOrderSearchParam)
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-2">
+                            <label class="control-label">Excepción</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DeliveryAmount, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @*@Html.EditorFor(model => model.DeliveryAmount, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownList("DeliveryAmount", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.DeliveryAmount, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsDeliveryAmountSearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.Label("Cantidad Minima por Entrega (Kg)", htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MinimumQuantityDelivery, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", @type = "text" } })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsMinimumQuantityDeliverySearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.MaximumMonthsStock, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @*@Html.EditorFor(model => model.MaximumMonthsStock, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.DropDownList("MaximumMonthsStock", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MaximumMonthsStock, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsMaximumMonthsStockSearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ExchangeTypeID, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.DropDownList("ExchangeTypeID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ExchangeTypeID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                                @Html.CheckBoxFor(model => model.IsExchangeTypeSearchParam)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.ExceptionPrice, htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.ExceptionPrice, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ExceptionPrice, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.Label("Aplicar", htmlAttributes: new { @class = "control-label col-md-12" })
+                            </div>
+                        </div>
+                        @*<div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.ApplyPriceFactor, true, htmlAttributes: new { @class = "form-check-input", id = "rad1" })
+                                        @Html.Label("Precio Proporcional", htmlAttributes: new { @class = "form-check-label", @style = "font-weight: normal", @for = "rad1" })
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.ApplyPriceFactor, false, htmlAttributes: new { @class = "form-check-input", id = "rad2" })
+                                        @Html.Label("Margen Equivalente", htmlAttributes: new { @class = "form-check-label", @style = "font-weight: normal", @for = "rad2" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ApplyPriceFactor, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>*@
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.ExceptionApplyType, ProductQuoteApp.Persistence.ExceptionApplyType.ApplyProporcionalPrice, htmlAttributes: new { @class = "form-check-input", id = "rad11" })
+                                        @Html.Label("Precio Proporcional", htmlAttributes: new { @class = "form-check-label", @style = "font-weight: normal", @for = "rad11" })
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.ExceptionApplyType, ProductQuoteApp.Persistence.ExceptionApplyType.ApplyEquivalentMargin, htmlAttributes: new { @class = "form-check-input", id = "rad22" })
+                                        @Html.Label("Margen Equivalente", htmlAttributes: new { @class = "form-check-label", @style = "font-weight: normal", @for = "rad22" })
+                                    </div>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.ExceptionApplyType, ProductQuoteApp.Persistence.ExceptionApplyType.ApplyPriceDirect, htmlAttributes: new { @class = "form-check-input", id = "rad33" })
+                                        @Html.Label("Precio Fijo", htmlAttributes: new { @class = "form-check-label", @style = "font-weight: normal", @for = "rad33" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ExceptionApplyType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group text-center">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-8">
+                        <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActSave class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $.ajax({
+                type: 'GET',
+                url: "/GetProductDetails/" + document.getElementById('ProductID').value,
+                success: function (result) {
+                    //alert(result.FCLKilogram);
+                    document.getElementById('FCLProduct').value = milesSep(result.FCLKilogram);
+                },
+                error: function (ex) {
+                }
+            });
+
+            function milesSep(arg) {
+                arg = arg + "";
+                //arg = arg.split(".").join("");
+                arg = arg.split(".");
+
+                var parteEntera = "";
+                var parteDecimal = "";
+                if ((arg + "").split(",").length == 2) {
+                    parteEntera = (arg + "").split(",")[0];
+                    parteDecimal = "," + (arg + "").split(",")[1];
+                }
+                else {
+                    parteEntera = arg;
+                }
+
+                return parteEntera.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".") + parteDecimal;
+
+            }
+
+            $("#DeliveryAmount").change(function () {
+                //var quantityOpenPurchaseOrder = parseFloat(document.getElementById('QuantityOpenPurchaseOrder').value);
+                var quantityOpenPurchaseOrder = document.getElementById('QuantityOpenPurchaseOrder').value.replace(".", "");
+                //var deliveryAmount = parseFloat(document.getElementById('DeliveryAmount').value);
+                var deliveryAmount = document.getElementById('DeliveryAmount').value.replace(".", "");
+
+                var minimumQuantityDelivery = quantityOpenPurchaseOrder / deliveryAmount;
+                //alert(minimumQuantityDelivery);
+
+                document.getElementById('MinimumQuantityDelivery').value = milesSep(minimumQuantityDelivery.toFixed(2).replace(".", ","));
+                
+                return false;
+            })
+
+            $("#ProductID").change(function () {
+
+                //alert(document.getElementById('ProductID').value);
+                $.ajax({
+                    type: 'GET',
+                    url: "/GetProductDetails/" + document.getElementById('ProductID').value,
+                    success: function (result) {
+                        //alert(result.FCLKilogram);
+                        document.getElementById('FCLProduct').value = milesSep(result.FCLKilogram);
+                    },
+                    error: function (ex) {
+                    }
+                });
+            })
+        });
+    </script>
+}
+

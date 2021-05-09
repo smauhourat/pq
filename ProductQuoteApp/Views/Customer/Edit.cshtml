@@ -1,0 +1,359 @@
+﻿@model ProductQuoteApp.Models.CustomerViewModel 
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActEdit;
+}
+
+<style type="text/css">
+    .col-header1 {
+        background-color: #eaebed;
+        height: 45px;
+        text-align: center;
+        font-size: medium;
+    }
+
+    .col-header2 {
+        background-color: #f5f3f3;
+    }
+
+    .rowGrid {
+        height: 40px;
+    }
+</style>
+
+<!--<h2>Edit</h2>-->
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h3>@ProductQuoteApp.Resources.Resources.EtyCustomer</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Company, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Company, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CreditRatingID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("CreditRatingID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CreditRatingID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SellerCommission, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.SellerCommission, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SellerCommission, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsSpot, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.IsSpot)
+                        @Html.ValidationMessageFor(model => model.IsSpot, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IsProspect, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.IsProspect)
+                        @Html.ValidationMessageFor(model => model.IsProspect, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.DelayAverageDays, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.DelayAverageDays, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.DelayAverageDays, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observation, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.Observation, new { @class = "form-control col-md-9 col-xs-12 ", @rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Observation, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SendNotifications, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.SendNotifications)
+                        @Html.ValidationMessageFor(model => model.SendNotifications, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div id="col-md-12 detailcontainer">
+                <h4><strong>Datos Contacto</strong></h4>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactName, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ContactName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactEmail, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ContactEmail, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactEmail, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactTE, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ContactTE, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ContactTE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ContactClassID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("ContactClassID", null, "Seleccionar", htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ContactClassID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+        </div>			
+
+
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+        <div class="row">
+            <div id="col-md-12 detailcontainer">
+                <h4><strong>Margenes por Modalidad</strong></h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td style="width: 270px">
+                                <strong>Modalidad</strong>
+                            </td>
+                            <td style="width:20%">
+                                <strong>Margen Minimo (%)</strong>
+                            </td>
+                            <td style="width:20%">
+                                <strong>Margen Minimo (USD)</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="control-label">Distribución Local</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_DL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DL, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_DL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DL, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Distribución con Importación a Pedido</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_DLP, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DLP, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_DLP, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DLP, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Indent con Servicio Logístico y Financiero de Guarda</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_ISL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_ISL, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_ISL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_ISL, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Indent</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_IND, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_IND, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_IND, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_IND, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @*<div class="row col-header1">
+            <div class="col-md-12">
+                <label class="control-label">Margenes por Modalidad</label>
+            </div>
+        </div>
+        <div class="row col-header2 rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Modalidad</label>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">Margen Minimo (%)</label>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">Margen Minimo (USD)</label>
+            </div>
+        </div>
+        <div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Distribución Local</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_DL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_DL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Distribución con Importación a Pedido</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_DLP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DLP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_DLP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DLP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Indent con Servicio Logístico y Financiero de Guarda</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_ISL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_ISL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_ISL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_ISL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Indent</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_IND, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_IND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_IND, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_IND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @*<input type="submit" value=@ProductQuoteApp.Resources.Resources.ActSave class="btn btn-default" />*@
+                        <input type="submit" name="SaveAction" value="Grabar" class="btn btn-default" />
+                        <input type="submit" name="SaveAndQuitAction" value="Grabar y Salir" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

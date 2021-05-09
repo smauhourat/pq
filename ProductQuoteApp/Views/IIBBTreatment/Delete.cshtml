@@ -1,0 +1,38 @@
+﻿@model ProductQuoteApp.Persistence.IIBBTreatment
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!---<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete Tratamientos IIBB</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Percentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Percentage)
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>

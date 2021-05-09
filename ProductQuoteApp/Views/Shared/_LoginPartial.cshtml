@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right" style="font-weight:normal">
+
+
+        @if (HttpContext.Current.User.IsInRole("AdminUser") || HttpContext.Current.User.IsInRole("SellerUser"))
+        {
+            string userFullName = (@Request.Cookies["_currentUserFullName"] == null ? "" : @Request.Cookies["_currentUserFullName"].Value);
+            userFullName = (userFullName == null || userFullName == "") ? "-" : userFullName;
+
+            <li>@Html.ActionLink(userFullName, "Index", "Manage/ChangePassword", routeValues: null, htmlAttributes: new { title = "Cambiar Contraseña" })</li>
+        }
+        else
+        {
+            string customerCompany = @Request.Cookies["_currentCustomerCompany"] == null ? "" : @Request.Cookies["_currentCustomerCompany"].Value;
+            string userFullName = (@Request.Cookies["_currentUserFullName"] == null ? "" : @Request.Cookies["_currentUserFullName"].Value) + " (" + customerCompany + ")";
+            userFullName = (userFullName == null || userFullName == "") ? "-" : userFullName;
+
+            <li>@Html.ActionLink(userFullName, "Index", "Manage/ChangePassword", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+        }
+
+
+
+        <li><a href="javascript:document.getElementById('logoutForm').submit()"><span class="glyphicon glyphicon-log-out"></span> Log off</a></li>
+    </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

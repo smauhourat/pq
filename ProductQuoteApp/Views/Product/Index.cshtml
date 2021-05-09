@@ -1,0 +1,97 @@
+﻿@model PagedList.IPagedList<ProductQuoteApp.Persistence.Product>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyProducts;
+}
+
+<h3>@ProductQuoteApp.Resources.Resources.EtyProducts</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <div class="control-group">
+        <div class="controls form-inline">
+            @Html.TextBox("SearchString", ViewBag.filter as string, new { @placeholder = "Buscar", @class = "form-control" })
+            <label for="Active">Activos:</label> @Html.CheckBox("Active", true, new { @class = "form-control" })
+            &nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+}
+
+<p></p>
+@using (Html.BeginForm("ExportToExcel2", "Product", FormMethod.Post))
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Nombre", "Index", new { sortOrder = ViewBag.ProductNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Proveedor", "Index", new { sortOrder = ViewBag.ProviderNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Marca", "Index", new { sortOrder = ViewBag.BrandNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Envase", "Index", new { sortOrder = ViewBag.PackagingSortName, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.ActionLink("Validez Precio", "Index", new { sortOrder = ViewBag.ValidityOfPriceSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstOrDefault().Active)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provider.ProviderName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Brand)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Packaging.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValidityOfPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td nowrap>
+                    <a title=@ProductQuoteApp.Resources.Resources.ActEdit href="@Url.Action("Edit", "Product", new { id = item.ProductID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "Product", new { id = item.ProductID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "Product", new { id = item.ProductID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+                </td>
+                <td nowrap>
+                    @Html.ActionLink("Copia", "CreateCopy", new { id = item.ProductID }) |
+                    @Html.ActionLink("Documentos", "ProductDocuments", new { id = item.ProductID })
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    @*<input type="submit" value="Export to Excel" class="button" style="display: none" />*@
+    @*<input type="submit" value="Export to Excel" class="button" />*@
+}
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, active = ViewBag.Active }))

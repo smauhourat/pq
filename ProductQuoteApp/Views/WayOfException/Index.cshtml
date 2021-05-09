@@ -1,0 +1,66 @@
+﻿@model PagedList.IPagedList<ProductQuoteApp.Persistence.WayOfException>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Vias de Excepcion";
+}
+
+<h3>Excepciones</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+@using (Html.BeginForm("Index", "WayOfException", FormMethod.Get))
+{
+    <div class="control-group">
+        <div class="controls form-inline">
+            @Html.TextBox("SearchString", ViewBag.filter as string, new { @placeholder = "Buscar", @class = "form-control" })
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+}
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Cliente", "Index", new { sortOrder = ViewBag.CustomerNameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Producto
+        </th>
+        <th>
+            Modalidad de Venta
+        </th>
+        <th>
+            Precion Excepción
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SaleModality.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExceptionPrice)
+        </td>
+        <td>
+            <a title=@ProductQuoteApp.Resources.Resources.ActEdit href="@Url.Action("Edit", "WayOfException", new { id = item.WayOfExceptionID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "WayOfException", new { id = item.WayOfExceptionID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "WayOfException", new { id = item.WayOfExceptionID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

@@ -1,0 +1,68 @@
+﻿@*@model IEnumerable<ProductQuoteApp.Persistence.Customer>*@
+@model PagedList.IPagedList<ProductQuoteApp.Persistence.Customer>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyCustomers;
+}
+
+<h3>@ProductQuoteApp.Resources.Resources.EtyCustomers</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+@using (Html.BeginForm("Index", "Customer", FormMethod.Get))
+{
+    <div class="control-group">
+        <div class="controls form-inline">
+            @Html.TextBox("SearchString", ViewBag.filter as string, new { @placeholder = "Buscar", @class = "form-control" })
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+<p></p>
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Company)*@
+            @Html.ActionLink("Cliente", "Index", new { sortOrder = ViewBag.CompanySortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Spot
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsSpot)
+        </td>        
+        <td>
+            <a title=@ProductQuoteApp.Resources.Resources.ActEdit href="@Url.Action("Edit", "Customer", new { id = item.CustomerID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "Customer", new { id = item.CustomerID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "Customer", new { id = item.CustomerID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+        </td>
+        <td>
+            <a title="Usuarios" href="@Url.Action("Users", "Customer", new { id = item.CustomerID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-users'></i></div></a>
+            <a title="Contactos con el Cliente" href="@Url.Action("Contacts", "Customer", new { id = item.CustomerID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-phone'></i></div></a>
+        </td>
+        <td>
+            @*@Html.ActionLink("Productos", "CustomerProduct", new { customerID = item.CustomerID })  |*@
+            @Html.ActionLink("Cotizaciones", "Index", "ProductQuote", new { pq = 1, customerID = item.CustomerID }, null) 
+            @*@Html.ActionLink("Ordenes Compra", "Index", "ProductQuote", new { pq = 0, customerID = item.CustomerID }, null)*@
+        </td>
+    </tr>
+}
+
+</table>
+<br />
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

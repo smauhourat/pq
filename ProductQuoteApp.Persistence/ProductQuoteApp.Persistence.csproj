@@ -1,0 +1,268 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{255A028E-8250-454C-8B98-A61265CE7FE5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ProductQuoteApp.Persistence</RootNamespace>
+    <AssemblyName>ProductQuoteApp.Persistence</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.0.35\lib\net461\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApplicationDbContext.cs" />
+    <Compile Include="Entities\AdminUser.cs" />
+    <Compile Include="Entities\SalesChannelUser.cs" />
+    <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\ContactClass.cs" />
+    <Compile Include="Entities\ContactType.cs" />
+    <Compile Include="Entities\CustomerOrderStatus.cs" />
+    <Compile Include="Entities\CustomerOrder.cs" />
+    <Compile Include="Entities\CustomerProduct.cs" />
+    <Compile Include="Entities\DueDateReason.cs" />
+    <Compile Include="Entities\EmailAccount.cs" />
+    <Compile Include="Entities\ExchangeType.cs" />
+    <Compile Include="Entities\GeographicAreaTransportType.cs" />
+    <Compile Include="Entities\GlobalVariable.cs" />
+    <Compile Include="Entities\FreightType.cs" />
+    <Compile Include="Entities\DeliveryAmount.cs" />
+    <Compile Include="Entities\IIBBTreatment.cs" />
+    <Compile Include="Entities\LogRecord.cs" />
+    <Compile Include="Entities\ReasonsForClosure.cs" />
+    <Compile Include="Entities\SaleModalityExchangeType.cs" />
+    <Compile Include="Entities\SaleModalityCustomerMargin.cs" />
+    <Compile Include="Entities\SaleModalityProductMargin.cs" />
+    <Compile Include="Entities\SaleModalityStockTime.cs" />
+    <Compile Include="Entities\SaleModalityDeliveryAmount.cs" />
+    <Compile Include="Entities\SaleModalityGeographicArea.cs" />
+    <Compile Include="Entities\SalesChannel.cs" />
+    <Compile Include="Entities\SellerCompany.cs" />
+    <Compile Include="Entities\SellerUser.cs" />
+    <Compile Include="Entities\ShipmentTracking.cs" />
+    <Compile Include="Entities\StockTime.cs" />
+    <Compile Include="Entities\PaymentDeadline.cs" />
+    <Compile Include="Entities\CreditRating.cs" />
+    <Compile Include="Entities\CurrencyType.cs" />
+    <Compile Include="Entities\Customer.cs" />
+    <Compile Include="Entities\CustomerUser.cs" />
+    <Compile Include="Entities\Identity.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\ProductDocument.cs" />
+    <Compile Include="Entities\ProductQuoteCalc.cs" />
+    <Compile Include="Entities\ProductQuote.cs" />
+    <Compile Include="Entities\Rofex.cs" />
+    <Compile Include="Entities\SaleModality.cs" />
+    <Compile Include="Entities\SaleModalityCreditRating.cs" />
+    <Compile Include="Entities\CreditRatingPaymentDeadline.cs" />
+    <Compile Include="Entities\SaleModalityProduct.cs" />
+    <Compile Include="Entities\TestModel.cs" />
+    <Compile Include="Entities\TransportType.cs" />
+    <Compile Include="Entities\Packaging.cs" />
+    <Compile Include="Entities\GeographicArea.cs" />
+    <Compile Include="Entities\Provider.cs" />
+    <Compile Include="Entities\WayOfException.cs" />
+    <Compile Include="Interceptor\ProductQuoteAppInterceptorLogging.cs" />
+    <Compile Include="IRepository\IAdminUserRepository.cs" />
+    <Compile Include="IRepository\IApplicationUserRepository.cs" />
+    <Compile Include="IRepository\IContactRepository.cs" />
+    <Compile Include="IRepository\IContactTypeRepository.cs" />
+    <Compile Include="IRepository\ICustomerOrderRepository.cs" />
+    <Compile Include="IRepository\ICustomerProductRepository.cs" />
+    <Compile Include="IRepository\IDueDateReasonRepository.cs" />
+    <Compile Include="IRepository\IEmailAccountRepository.cs" />
+    <Compile Include="IRepository\IExchangeTypeRepository.cs" />
+    <Compile Include="IRepository\IGenericRepository.cs" />
+    <Compile Include="IRepository\IGeographicAreaTransportTypeRepository.cs" />
+    <Compile Include="IRepository\IGlobalVariableRepository.cs" />
+    <Compile Include="IRepository\IFreightTypeRepository.cs" />
+    <Compile Include="IRepository\IDeliveryAmountRepository.cs" />
+    <Compile Include="IRepository\ILogRecordRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityCustomerMarginRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityProductMarginRepository.cs" />
+    <Compile Include="IRepository\ISalesChannelRepository.cs" />
+    <Compile Include="IRepository\ISalesChannelUserRepository.cs" />
+    <Compile Include="IRepository\ISellerCompanyRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityDeliveryAmountRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityGeographicAreaRepository.cs" />
+    <Compile Include="IRepository\IStockTimeRepository.cs" />
+    <Compile Include="IRepository\IPaymentDeadlineRepository.cs" />
+    <Compile Include="IRepository\ICreditRatingRepository.cs" />
+    <Compile Include="IRepository\ICurrencyTypeRepository.cs" />
+    <Compile Include="IRepository\IGeographicAreaRepository.cs" />
+    <Compile Include="IRepository\ICustomerRepository.cs" />
+    <Compile Include="IRepository\IProductDocumentRepository.cs" />
+    <Compile Include="IRepository\IProductQuoteRepository.cs" />
+    <Compile Include="IRepository\IProductRepository.cs" />
+    <Compile Include="IRepository\IRofexRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityCreditRatingRepository.cs" />
+    <Compile Include="IRepository\ICreditRatingPaymentDeadlineRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityProductRepository.cs" />
+    <Compile Include="IRepository\ISaleModalityRepository.cs" />
+    <Compile Include="IRepository\ITestModelRepository.cs" />
+    <Compile Include="IRepository\ITransportTypeRepository.cs" />
+    <Compile Include="IRepository\IPackagingRepository.cs" />
+    <Compile Include="IRepository\IProviderRepository.cs" />
+    <Compile Include="IRepository\IShipmentTrackingRepository.cs" />
+    <Compile Include="IRepository\IWayOfExceptionRepository.cs" />
+    <Compile Include="Logging\DefaultLogger.cs" />
+    <Compile Include="MetaData\ContactMetaData.cs" />
+    <Compile Include="MetaData\ContactClassMetaData.cs" />
+    <Compile Include="MetaData\ContactTypeMetaData.cs" />
+    <Compile Include="MetaData\CustomerOrderMetaData.cs" />
+    <Compile Include="MetaData\DueDateReasonMetaData.cs" />
+    <Compile Include="MetaData\EmailAccountMetaData.cs" />
+    <Compile Include="MetaData\GlobalVariableMetaData.cs" />
+    <Compile Include="MetaData\FreightTypeMetaData.cs" />
+    <Compile Include="MetaData\DeliveryAmountMetaData.cs" />
+    <Compile Include="MetaData\IIBBTreatmentMetaData.cs" />
+    <Compile Include="MetaData\ReasonsForClosureMetaData.cs" />
+    <Compile Include="MetaData\SalesChannelMetaData.cs" />
+    <Compile Include="MetaData\SellerCompanyMetaData.cs" />
+    <Compile Include="MetaData\StockTimeMetaData.cs" />
+    <Compile Include="MetaData\PaymentDeadlineMetaData.cs" />
+    <Compile Include="MetaData\CustomerMetaData.cs" />
+    <Compile Include="MetaData\CreditRatingMetaData.cs" />
+    <Compile Include="MetaData\ProductDocumentMetaData.cs" />
+    <Compile Include="MetaData\ProductQuoteMetaData.cs" />
+    <Compile Include="MetaData\ProductMetaData.cs" />
+    <Compile Include="MetaData\RofexMetaData.cs" />
+    <Compile Include="MetaData\SaleModalityCreditRatingMetaData.cs" />
+    <Compile Include="MetaData\TransportTypeMetaData.cs" />
+    <Compile Include="MetaData\PackagingMetaData.cs" />
+    <Compile Include="MetaData\GeographicAreaMetaData.cs" />
+    <Compile Include="MetaData\ProviderMetaData.cs" />
+    <Compile Include="MetaData\WayOfExceptionMetaData.cs" />
+    <Compile Include="Precision.cs" />
+    <Compile Include="ProductQuoteAppContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AdminUserRepository.cs" />
+    <Compile Include="Repositories\ApplicationUserRepository.cs" />
+    <Compile Include="Repositories\ContactRepository.cs" />
+    <Compile Include="Repositories\ContactTypeRepository.cs" />
+    <Compile Include="Repositories\CustomerOrderRepository.cs" />
+    <Compile Include="Repositories\CustomerProductRepository.cs" />
+    <Compile Include="Repositories\DueDateReasonRepository.cs" />
+    <Compile Include="Repositories\EmailAccountRepository.cs" />
+    <Compile Include="Repositories\ExchangeTypeRepository.cs" />
+    <Compile Include="Repositories\GenericRepository.cs" />
+    <Compile Include="Repositories\GeographicAreaTransportTypeRepository.cs" />
+    <Compile Include="Repositories\GlobalVariableRepository.cs" />
+    <Compile Include="Repositories\FreightTypeRepository.cs" />
+    <Compile Include="Repositories\DeliveryAmountRepository.cs" />
+    <Compile Include="Repositories\LogRecordRepository.cs" />
+    <Compile Include="Repositories\SaleModalityCustomerMarginRepository.cs" />
+    <Compile Include="Repositories\SaleModalityProductMarginRepository.cs" />
+    <Compile Include="Repositories\SalesChannelRepository.cs" />
+    <Compile Include="Repositories\SalesChannelUserRepository.cs" />
+    <Compile Include="Repositories\SellerCompanyRepository.cs" />
+    <Compile Include="Repositories\SaleModalityDeliveryAmountRepository.cs" />
+    <Compile Include="Repositories\SaleModalityGeographicAreaRepository.cs" />
+    <Compile Include="Repositories\ShipmentTrackingRepository.cs" />
+    <Compile Include="Repositories\StockTimeRepository.cs" />
+    <Compile Include="Repositories\PaymentDeadlineRepository.cs" />
+    <Compile Include="Repositories\CreditRatingRepository.cs" />
+    <Compile Include="Repositories\CurrencyTypeRepository.cs" />
+    <Compile Include="Repositories\CustomerRepository.cs" />
+    <Compile Include="Repositories\ProductDocumentRepository.cs" />
+    <Compile Include="Repositories\ProductQuoteRepository.cs" />
+    <Compile Include="Repositories\ProductRepository.cs" />
+    <Compile Include="Repositories\RofexRepository.cs" />
+    <Compile Include="Repositories\SaleModalityCreditRatingRepository.cs" />
+    <Compile Include="Repositories\CreditRatingPaymentDeadlineRepository.cs" />
+    <Compile Include="Repositories\SaleModalityProductRepository.cs" />
+    <Compile Include="Repositories\SaleModalityRepository.cs" />
+    <Compile Include="Repositories\TestModelRepository.cs" />
+    <Compile Include="Repositories\TransportTypeRepository.cs" />
+    <Compile Include="Repositories\PackagingRepository.cs" />
+    <Compile Include="Repositories\GeographicAreaRepository.cs" />
+    <Compile Include="Repositories\ProviderRepository.cs" />
+    <Compile Include="Repositories\WayOfExceptionRepository.cs" />
+    <Compile Include="Validators\ProductQuoteAppException.cs" />
+    <Compile Include="Validators\ShipmentTrackingRules.cs" />
+    <Compile Include="Validators\WayOfExceptionRules.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ProductQuoteApp.Logging\ProductQuoteApp.Logging.csproj">
+      <Project>{ed1fc198-b8b1-440e-b3e3-ef65a566e613}</Project>
+      <Name>ProductQuoteApp.Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProductQuoteApp.Resources\ProductQuoteApp.Resources.csproj">
+      <Project>{5d5a073d-3a12-457c-8578-d8f77c7d9499}</Project>
+      <Name>ProductQuoteApp.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.8.18.0.27296\analyzers\Google.Protobuf.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.8.18.0.27296\analyzers\SonarAnalyzer.CFG.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.8.18.0.27296\analyzers\SonarAnalyzer.CSharp.dll" />
+    <Analyzer Include="..\packages\SonarAnalyzer.CSharp.8.18.0.27296\analyzers\SonarAnalyzer.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

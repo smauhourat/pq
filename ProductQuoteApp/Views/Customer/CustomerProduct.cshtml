@@ -1,0 +1,110 @@
+﻿@using Microsoft.AspNet.Identity
+
+@{
+    ViewBag.Title = "Asignación de Productos a Clientes";
+}
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/knockout.validation.min.js"></script>
+<script src="~/Scripts/knockout.custom.bindings.js?0.8.0.41"></script>
+
+<style>
+    .c1{ 
+        background-color: transparent;
+        cursor: default;
+    } 
+    .c1:hover { 
+        background-color: lightgray;
+        cursor: pointer;
+    } 
+    div.ex3 {
+        width: 100%;
+        height: 510px;
+        overflow: auto;
+    }
+</style>
+
+
+<!--<h2></h2>-->
+
+<h3>Productos del Cliente: @ViewBag.CustomerName</h3>
+<input type="hidden" id="myHDCustomerID" value="@ViewBag.CustomerID" />
+<input type="hidden" id="myHDCustomerName" value="@ViewBag.CustomerName" />
+
+<table class="table">
+    <tr>
+        <td style="width:45%">
+            <div class="ex3">
+                <div class="control-group">
+                    <div class="controls form-inline">
+                        <input class="form-control" data-bind="value: Query1, valueUpdate: 'keyup'" autocomplete="off" title="Buscador de Productos Asignados">
+                        <input type="button" value="Eliminar Todos" data-bind="click: function() {$root.deleteAllCustomerProductsByCustomer();}, enable: assignedProductsListFiltered().length>0" class="btn btn-default" />
+                    </div>
+                 </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td>
+                                <strong>Productos Asignados</strong>
+                            </td>
+                            <td>
+                                <strong>Ver Costeo</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:assignedProductsListFiltered">
+                        <tr class="c1" title="Doble Click para quitar el Producto" data-bind="click: { single: function() { return null; }, double: function() { $root.desassignProductToCustomer($data.CustomerProductID) }}">
+                            <td> <span data-bind="text:ProductName"></span></td>
+                            <td><input type="checkbox" data-bind="checked: CalculationDetails, value: CustomerProductID, click: function() {$root.changeCustomerProductCalDetailsValue($data);}" /></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+        <td style="width:10%" align="center">
+            <table border="0">
+                <tr>
+                    <td>
+                        <ul class="pagination2">
+                            @*<li class="active"><a>></a></li>
+                            <li class="active"><a><</a></li>*@
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="width:45%">
+            <div class="ex3">
+                <div class="control-group">
+                    <div class="controls form-inline">
+                        <input class="form-control" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off" title="Buscador de Productos Disponibles">
+                        <input type="button" value="Asignar Todos" data-bind="click: function() {$root.addAllProductsToCustomer();}, enable: availableProductsListFiltered().length>0" class="btn btn-default" />
+                    </div>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <strong>Productos Disponibles</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="foreach:availableProductsListFiltered">
+                        @*<tr class="c1" data-bind="click: { single: function() { alert(2); }, double: function() { alert($data.ProductID)}}">
+                    <tr class="c1" data-bind="click: { single: function() { alert(2); }, double: function() { alert($data.ProductID) }}">*@
+                        <tr class="c1" title="Doble Click para agregar el Producto" data-bind="click: { single: function() { return null; }, double: function() { $root.assignProductToCustomer($data) }}">
+                            <td></td>
+                            <td> <span data-bind="text:FullName"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </td>
+    </tr>
+</table>
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>
+<script src="~/Scripts/ViewModels/CustomerProductViewModel.js"></script>

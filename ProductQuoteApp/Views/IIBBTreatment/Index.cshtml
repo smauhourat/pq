@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.IIBBTreatment>
+
+@{
+    ViewBag.Title = "Tratamiento IIBB";// @ProductQuoteApp.Resources.Resources.EtyRofexs;
+}
+
+@*<h3>@ProductQuoteApp.Resources.Resources.EtyRofexs</h3>*@
+<div class="row" style="margin-bottom:15px;">
+    <h3>Tratamiento IIBB</h3>
+</div>
+<div class="row">
+    <p>
+        @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+    </p>
+</div>
+<div class="row">
+    <table class="table">
+        <tr>
+            <th width="50%">
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th width="50%">
+                @Html.DisplayNameFor(model => model.Percentage)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Percentage)
+                </td>
+                <td nowrap>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActEdit" href="@Url.Action("Edit", "IIBBTreatment", new { id = item.IIBBTreatmentID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "IIBBTreatment", new { id = item.IIBBTreatmentID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

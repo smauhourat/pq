@@ -1,0 +1,46 @@
+﻿@model ProductQuoteApp.Models.ContactViewModel 
+
+@{
+    ViewBag.Title = "Eliminar Contacto";
+}
+
+@using (Html.BeginForm("ContactsDelete", "Customer", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.CustomerID)
+    @Html.HiddenFor(model => model.ContactID)
+<div>
+    <h3>Esta usted seguro de eliminar el Contacto?</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DateContact)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateContact)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactType.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <input type="submit" value="Eliminar" class="btn btn-default" /> |
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>
+}

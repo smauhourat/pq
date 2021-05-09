@@ -1,0 +1,13 @@
+﻿@model ProductQuoteApp.Models.HomeLoginViewModel
+
+    @{
+        ViewBag.Title = "Home Login/Register";
+    }
+    <div class="row">
+        <div class="col-md-6">
+            @Html.Partial("_RegisterHomeForm", Model.RegisterHomeViewModel)
+        </div>
+        <div class="col-md-6">
+            @Html.Partial("_LoginHomeForm", Model.LoginHomeViewModel)
+        </div>
+    </div>

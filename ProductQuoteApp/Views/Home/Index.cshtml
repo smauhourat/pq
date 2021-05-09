@@ -1,0 +1,90 @@
+﻿@{
+    Layout = "";
+}
+
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="Saywhat" />
+    <title>QuimKong</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/favicon/site.webmanifest">
+    <link rel="mask-icon" href="~/assets/favicon/safari-pinned-tab.svg" color="#E01E24">
+    <meta name="msapplication-TileColor" content="white">
+    <meta name="theme-color" content="white">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/custom.css">
+</head>
+
+<body class="welcome">
+    <header>
+        <nav class="navbar navbar-default">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hamburguer" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar top-bar"></span>
+                        <span class="icon-bar middle-bar"></span>
+                        <span class="icon-bar bottom-bar"></span>
+                    </button>
+                    <a class="navbar-brand visible-sm visible-md visible-lg"><img src="~/assets/svg/quimkong.svg" alt="QuimKong Brand"></a>
+                    <a class="navbar-brand hidden-sm hidden-md hidden-lg" href="home.html"><img src="~/assets/svg/quimkong.svg" width="211" height="45" alt="QuimKong Brand"></a>
+                </div>
+                <div class="collapse navbar-collapse" id="hamburguer">
+                    <ul class="nav navbar-nav navbar-right">
+                        @*<li><a href="#"><i class="fas fa-sign-in-alt"></i> LOGIN</a></li>
+                        <li class="fas fa-sign-in-alt">@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>*@
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container -->
+        </nav>
+    </header><!-- header -->
+    <section class="vertical-center mt-2-xs">
+        <div class="container">
+            <div class="row">
+                <div class="container carousel slide carousel-fade" data-ride="carousel">
+                    <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><h1>Porque somos flexibles, dejamos que usted decida las condiciones</h1></div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- item -->
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><h1>Porque creemos que cada cliente necesita una propuesta diferente</h1></div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- item -->
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><h1>Porque sabemos que prefiere evaluar todas las opciones antes de tomar una decisión</h1></div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- item -->
+                        <div class="item">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8"><h1>Porque su tiempo es el recurso más valioso</h1></div><!-- col -->
+                            </div><!-- row -->
+                        </div><!-- item -->
+                    </div><!-- carousel-inner -->
+                </div><!-- carousel -->
+                <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 mt-2">
+                    <p><strong>QUIMKONG</strong> es la plataforma que le permite evaluar distintas opciones de compra para sus productos químicos, obteniendo una cotización en forma instantánea. Con esta herramienta, usted podrá seleccionar las condiciones de contratación de los productos que desea adquirir y colocar órdenes de compra online.</p>
+                </div><!-- col -->
+                <div class="col-xs-8 col-sm-4 col-md-4 col-lg-4 mt-2 mb-2">
+                    <a href="/ProductQuoteApp/Home/Default" class="btn btn-primary btn-home" role="button">Ingresar a QuimKong</a>
+                </div><!-- col -->
+            </div><!-- row -->
+        </div><!-- container -->
+    </section>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="application/javascript" src="//script2.chat-robot.com/?token=d75c4cf58f99a841096288574032f22b"></script>
+</body>
+</html>

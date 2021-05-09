@@ -1,0 +1,323 @@
+﻿@model ProductQuoteApp.Persistence.Product
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!--<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete @ProductQuoteApp.Resources.Resources.EtyProduct</h3>
+<div>
+    <hr />
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Name):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Provider):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Provider.ProviderName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Brand):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Brand)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SellerCompany):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SellerCompany.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Packaging):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Packaging.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PositionKilogram):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FCLKilogram)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FCLKilogram):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FCLKilogram)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ValidityOfPrice):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ValidityOfPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Active):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Active)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Waste):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Waste)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FreightType):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FreightType.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProviderPaymentDeadline):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProviderPaymentDeadline)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IIBBTreatment):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IIBBTreatment.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.LeadTime):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.LeadTime)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.BuyAndSellDirect):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.BuyAndSellDirect)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.InOutStorage):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.InOutStorage)
+                    </dd>
+
+
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.MinimumMarginPercentage):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MinimumMarginPercentage)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MinimumMarginUSD):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MinimumMarginUSD)
+                    </dd>*@
+
+                    @*<dt>
+                        @Html.DisplayNameFor(model => model.ProductCost_DL):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductCost_DL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductCost_DLP):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductCost_DLP)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductCost_ISL):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductCost_ISL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ProductCost_IND):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ProductCost_IND)
+                    </dd>*@
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Observations):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Observations)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ClientObservations):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ClientObservations)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+
+    @*<dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Provider)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provider.ProviderName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Brand)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Brand)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Packaging)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Packaging.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionKilogram)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionKilogram)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValidityOfPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValidityOfPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteToRevision)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteToRevision)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Waste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Waste)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FreightType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FreightType.Description)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderPaymentDeadline)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderPaymentDeadline)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.LeadTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LeadTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyAndSellDirect)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BuyAndSellDirect)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MinimumMarginPercentage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinimumMarginPercentage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinimumMarginUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinimumMarginUSD)
+        </dd>
+    </dl>*@
+
+    @*@using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }*@
+</div>

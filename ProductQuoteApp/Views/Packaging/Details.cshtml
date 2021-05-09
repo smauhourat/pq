@@ -1,0 +1,32 @@
+﻿@model ProductQuoteApp.Persistence.Packaging
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDetails;
+}
+
+<!--<h2>@ProductQuoteApp.Resources.Resources.Details</h2>-->
+
+<div>
+    <h3>@ProductQuoteApp.Resources.Resources.EtyPackaging</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Stackable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stackable)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActEdit, "Edit", new { id = Model.PackagingID }) |
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>

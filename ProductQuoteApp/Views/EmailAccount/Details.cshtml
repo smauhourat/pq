@@ -1,0 +1,74 @@
+﻿@model ProductQuoteApp.Persistence.EmailAccount
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDetails;
+}
+
+<!--<h2>@ProductQuoteApp.Resources.Resources.Details</h2>-->
+
+<div>
+    <h3>Cuentas</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DisplayName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Host)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Host)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Port)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Port)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EnableSsl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnableSsl)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UseDefaultCredentials)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UseDefaultCredentials)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDefault)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDefault)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActEdit, "Edit", new { id = Model.EmailAccountId }) |
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>

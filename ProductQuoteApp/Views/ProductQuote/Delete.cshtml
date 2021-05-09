@@ -1,0 +1,145 @@
+﻿@using Microsoft.AspNet.Identity
+@using ProductQuoteApp.Library;
+@using ProductQuoteApp.Helpers
+
+@model ProductQuoteApp.Persistence.ProductQuote
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!--<h2>ProductQuoteApp.Resources.Resources.Details</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.EtyProductQuote</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Cotización
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductQuoteCode)
+        </dd>
+@if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+{
+
+        <dt>
+            Contacto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerContactName)
+        </dd>
+}        
+        <dt>
+            Cliente
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CustomerCompany)
+        </dd>
+        <dt>
+            Producto
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+        {
+            <dt class="fullWidth">
+                Proveedor:
+            </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ProductProviderName)
+                        </dd>
+        }
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SaleModalityName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SaleModalityName)
+        </dd>
+
+        <dt>
+            Lugar de Entrega
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GeographicAreaName)
+        </dd>
+
+        <dt>
+            Condición de Pago
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaymentDeadlineName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuantityOpenPurchaseOrder)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuantityOpenPurchaseOrder)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MinimumQuantityDelivery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MinimumQuantityDelivery)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateQuote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateQuote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateDelivery)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateDelivery)
+        </dd>
+
+        <dt>
+            Documento
+        </dt>
+
+        <dd>
+            <a href="~/Documents/Export/@Model.ProductQuotePDF" target="_blank">
+                Descargar
+            </a>
+        </dd>
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID})
+        </div>
+    }
+</div>

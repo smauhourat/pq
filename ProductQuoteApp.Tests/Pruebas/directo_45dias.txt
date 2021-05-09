@@ -1,0 +1,116 @@
+-		productQuote	{ProductQuoteApp.Persistence.ProductQuote}	ProductQuoteApp.Persistence.ProductQuote
+		AlmacenamientoCosto_PorITEM	130	decimal
+		AlmacenamientoCosto_PorTON	0.0051861702127659574468085106	decimal
+		ApplyPriceFactor	false	bool
+		CanShowCosteo	false	bool
+		Comisiones_PorITEM	1.0000000000	decimal
+		Comisiones_PorTON	0.0152495237584180730326527327	decimal
+		CostoFin_PorTON	0	decimal
+		CostoFinancieroMensual_PorITEM	3.500	decimal
+		CostoFinancieroMensual_PorITEM_Formula	"( [Condición de Pago (Dias)] + [Tiempo Medio en Stock (Días)] - [Plazo Pago Proveedor (Días desde Factura)] + [Lead Time (Días desde Factura)] ) * [Costo Financiero (TEM %)]"	string
+		CostoFinancieroMensual_PorTON	0.0533733331544632556142845644	decimal
+		CostoFleteInput	null	decimal?
+		CostoProducto_PorTON	1.2020000000	decimal
+		CustomerCompany	"Stoller S.A."	string
+		CustomerContactMail	""	string
+		CustomerContactName	null	string
+		CustomerID	2	int
+		CustomerName	""	string
+		CustomerOrder	null	ProductQuoteApp.Persistence.CustomerOrder
+		CustomerTotalCost	1.3724571382576265729387459418	decimal
++		DateDelivery	{01/01/0001 0:00:00}	System.DateTime
++		DateQuote	{01/01/0001 0:00:00}	System.DateTime
+		DeliveryAmount	3	int
+		ExchangeInsurance	0	decimal
+		ExchangeInsurance_PorTON	0	decimal
+		ExchangeTypeID	1	int
+		ExchangeTypeLargeDescription	"Con variación Tipo Cambio"	string
+		ExchangeTypeName	"Dólares"	string
+		FactorRofex	1	decimal
+		FactorRofexInput	null	decimal?
+		Flete_PorITEM	1200.0000000000	decimal
+		Flete_PorTON	0.0006648936170212765957446809	decimal
+		FreightType	"Carga Seca "	string
+		GVD_CostoAlmacenamientoMensual	130	decimal
+		GVD_CostoFinancieroMensual	1.00	decimal
+		GVD_CostoInOut	54	decimal
+		GVD_DiasStockPromedioDistLocal	60	int
+		GVD_FactorCostoAlmacenamientoMensual	2	decimal
+		GVD_GastosFijos	0.00	decimal
+		GVD_IIBBAlicuota	5.00	decimal
+		GVD_ImpuestoDebitoCredito	1.20	decimal
+		GVD_TipoCambio	37.6	decimal
+		GV_CostoAlmacenamientoMensual	130	decimal
+		GV_CostoFinancieroMensual	1.00	decimal
+		GV_DiasStockPromedioDistLocal	60	int
+		GV_FactorCostoAlmacenamientoMensual	2	decimal
+		GastosFijos_PorITEM	0.00	decimal
+		GastosFijos_PorTON	0	decimal
+		GeographicAreaID	2	int
+		GeographicAreaName	"GBA Norte"	string
+		HasWayOfException	false	bool
+		IIBBAlicuota_PorITEM	5.00	decimal
+		IIBBAlicuota_PorTON	0.0762476187920903651632636634	decimal
+		ImpuestoDC_PorITEM	1.20	decimal
+		ImpuestoDC_PorTON	0.0182994285101016876391832792	decimal
+		Inout_PorITEM	54	decimal
+		Inout_PorTON	0.0014361702127659574468085106	decimal
+		IsDeliveryAmountFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsExchangeTypeFindParam	ParametroVariable	ProductQuoteApp.Persistence.ExceptionParamType
+		IsGeographicAreaFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsMaximumMonthsStockFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsPaymentDeadlineFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsQuantityOpenPurchaseOrderFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsSaleModalityFindParam	Indefinido	ProductQuoteApp.Persistence.ExceptionParamType
+		IsSellerUser	true	bool
+		LeyendaCalculoCostoTransporte	"Entrega Individual = [[PickUp]*8]]*3"	string
+		MargenInput	null	decimal?
+		MargenNetoEntidadOrigen	"Margen 10,00% (Modalidad de Venta) - Margen 130,00USD (Modalidad de Venta) [Mayor %]"	string
+		MargenNetoOriginalPorc_PorTON	10.0	decimal
+		MargenNetoOriginalUSD_PorTON	0.1524952375841807303265273269	decimal
+		MargenNetoPORCRofex	10.0	decimal
+		MargenNetoPorc_PorTON	10.0000000000	decimal
+		MargenNetoUSDRofex	0.1524952375841807303265273269	decimal
+		MargenNetoUSD_PorTON	0.1524952375841807303265273269	decimal
+		MaximumMonthsStock	3	int?
+		Merma_PorITEM	0.0000000000	decimal
+		Merma_PorTON	0	decimal
+		Message	""	string
+		MinimumQuantityDelivery	16000	int
+		Observations	""	string
+		PaymentDeadlineID	4	int
+		PaymentDeadlineMonths	1.5	decimal
+		PaymentDeadlineName	"45 Días FF"	string
+		PrecioInput	null	decimal?
+		PrecioVentaRofex	1.5249523758418073032652732687	decimal
+		Price	1.5249523758418073032652732687	decimal
+		PriceOriginal	1.5249523758418073032652732687	decimal
+		ProductBrandName	"China"	string
+		ProductBuyAndSellDirect	false	bool
+		ProductFCLKilogram	"24000"	string
+		ProductID	2039	int
+		ProductLeadTime	60	int
+		ProductName	"Acido Formico 85% - China - IBC 1000 L (No Retornable)"	string
+		ProductPackagingID	2	int
+		ProductPackagingName	"IBC 1000 L (No Retornable)"	string
+		ProductProviderName	"Biesterfeld"	string
+		ProductProviderPaymentDeadline	45	int
+		ProductQuoteCode	null	string
+		ProductQuoteID	0	int
+		ProductQuotePDF	null	string
+		ProductSellerCompanyName	"Laquim S.A."	string
+		ProductSingleName	"Acido Formico 85%"	string
++		ProductValidityOfPrice	{01/10/2018 0:00:00}	System.DateTime?
+		ProductWaste	0	decimal
+		QuantityOpenPurchaseOrder	48000	int
+		SaleModalityID	2	int
+		SaleModalityName	"Distribución con Importación a Pedido"	string
+		ShipmentTracking	null	ProductQuoteApp.Persistence.ShipmentTracking
+		TiempoMedioStockDias_Formula	"[Máximo Tiempo en Stock (Meses)] / [Factor Tiempo en Stock]"	string
+		TiempoMedioStockMeses	1.5	decimal
+		TypeChange	37.6	decimal
+		UserId	"c2fbb2e1-52d4-4f79-b66b-e35ad3958a36"	string
+		ValorRofex	41.4000000000	decimal
+		WayOfExceptionValue	0	decimal
+		WorkingCapital	105.0	decimal
+		WorkingCapital_Formula	"[Condición de Pago (Dias)] + [Tiempo Medio en Stock (Días)] + [Lead Time (Días desde Factura)] - [Plazo Pago Proveedor (Días desde Factura)]"	string

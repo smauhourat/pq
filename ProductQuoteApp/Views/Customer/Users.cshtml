@@ -1,0 +1,58 @@
+﻿@model ProductQuoteApp.Models.CustomerUserViewModel
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyUsers;
+}
+
+<!--<h2></h2>-->
+
+
+<h3>Usuarios del Cliente: @Model.CustomerName </h3>
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "UsersCreate", "Customer", new { customerID = Model.CustomerID }, null)
+</p>
+<table class="table">
+    <tr>
+        @*<th>
+            @ProductQuoteApp.Resources.Resources.EtyCustomer
+        </th>*@
+        <th>
+            @ProductQuoteApp.Resources.Resources.PtyName
+        </th>
+        <th>
+            @ProductQuoteApp.Resources.Resources.PtyEmail
+        </th>
+        <th>
+            @ProductQuoteApp.Resources.Resources.PtyJobPosition
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+@foreach (var item in Model.Users) {
+    <tr>
+        @*<td>
+            @Html.DisplayFor(modelItem => modelItem.CustomerName)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JobPosition)
+        </td>
+        <td>
+            @Html.ActionLink("Resetear Contraseña", "UserSetPassword", "Customer", new { customerID = Model.CustomerID, id = item.Id }, null) |
+            @Html.ActionLink("Editar", "UsersEdit", "Customer", new { customerID = Model.CustomerID, userId = item.Id }, null) |
+            @Html.ActionLink("Eliminar", "UserDelete", "Customer", new { customerID = Model.CustomerID, id = item.Id }, null)
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>

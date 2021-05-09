@@ -1,0 +1,53 @@
+﻿@model ProductQuoteApp.Persistence.TransportType
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDetails;
+}
+
+<!--<h2>ProductQuoteApp.Resources.Resources.Details</h2>-->
+
+<div>
+    <h3>@ProductQuoteApp.Resources.Resources.EtyTransportType</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionQuantityFrom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionQuantityFrom)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PositionQuantityTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PositionQuantityTo)
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.Stackable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Stackable)
+        </dd>*@
+        <dt>
+            @Html.DisplayNameFor(model => model.FreightType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FreightType.Description)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActEdit, "Edit", new { id = Model.TransportTypeID }) |
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>

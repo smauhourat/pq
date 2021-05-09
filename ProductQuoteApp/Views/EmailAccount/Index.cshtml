@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.EmailAccount>
+
+@{
+    ViewBag.Title = "Cuentas de email";
+}
+
+<h3>Cuentas</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DisplayName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Host)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Port)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDefault)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Host)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Port)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Username)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDefault)
+        </td>
+        <td>
+            <a title="@ProductQuoteApp.Resources.Resources.ActEdit" href="@Url.Action("Edit", "EmailAccount", new { id = item.EmailAccountId })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "EmailAccount", new { id = item.EmailAccountId })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "EmailAccount", new { id = item.EmailAccountId })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+        </td>
+    </tr>
+}
+
+</table>

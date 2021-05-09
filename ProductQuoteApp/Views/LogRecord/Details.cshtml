@@ -1,0 +1,62 @@
+﻿@model ProductQuoteApp.Persistence.LogRecord
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDetails;
+}
+
+<!--<h2>@ProductQuoteApp.Resources.Resources.Details</h2>-->
+<style type="text/css">
+    .celda {
+        font-size: 10px;
+        font-style: initial;
+    }
+
+    .red {
+        color: red;
+    }
+
+    .white {
+        color: white;
+    }
+</style>
+<div>
+    <h3>Log</h3>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Nivel
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LogLevel)
+        </dd>
+
+        <dt>
+            Fecha
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedOnUtc)
+        </dd>
+
+        <dt>
+            Mensaje
+        </dt>
+
+        <dd>
+            @*@Html.DisplayFor(model => model.ShortMessage)*@
+            @Html.TextAreaFor(model => model.ShortMessage, new { @class = "form-control celda", @rows = "7", @cols = "150", @readonly = "readonly" })
+        </dd>
+        <dt>
+            Detalle
+        </dt>
+
+        <dd>
+            @Html.TextAreaFor(model => model.FullMessage, new { @class = "form-control celda", @rows = "20", @cols = "150", @readonly = "readonly" })
+        </dd>
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActEdit, "Edit", new { id = Model.ProviderID }) |*@
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</p>

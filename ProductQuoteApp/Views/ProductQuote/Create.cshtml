@@ -1,0 +1,1213 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyProductQuote;
+}
+@*https://getbootstrap.com/docs/3.3/javascript/*@
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/knockout.validation.min.js"></script>
+<script src="~/Scripts/knockout.custom.bindings.js?0.8.0.41"></script>
+
+<style type="text/css">
+        .form-horizontal .form-group {
+            margin-bottom: 5px;
+        }
+
+        .tdproduct {
+            border: 0px solid #000000;
+            text-align: end;
+        }
+
+        input.wrong-field {
+            border: 1px solid red;
+        }
+
+        span.wrong-field {
+            color: #FF0000;
+        }
+</style>
+
+<div>
+    <h3>
+        @ProductQuoteApp.Resources.Resources.EtyProductQuote <span data-bind="text:isSellerUser() ? ' - Vendedor Interno' : ''"></span>
+</h3>
+<hr />
+<div class="form-horizontal">
+    <input type="hidden" id="myHDCurrentUserIsSellerUser" value="@ViewBag.CurrentUserIsSellerUser" />
+    <input type="hidden" id="myHDCurrentUserEditGlobalVariables" value="@ViewBag.CurrentUserEditGlobalVariables" />
+    <input type="hidden" id="myHDCurrentUserEditMarginOrPrice" value="@ViewBag.CurrentUserEditMarginOrPrice" />
+    <input type="hidden" id="myHDCurrentUserSeeCosting" value="@ViewBag.CurrentUserSeeCosting" />
+
+    <input type="hidden" id="myHDCurrentCustomerID" value="@ViewBag.CurrentCustomerID" />
+    <input type="hidden" id="myHDUserId" value="@ViewBag.CurrentUserId" />
+    <input type="hidden" id="myHDCurrentUserFullName" value="@ViewBag.CurrentUserFullName" />
+    <input type="hidden" id="myHDCurrentUserEmail" value="@ViewBag.CurrentUserEmail" />
+    <input type="hidden" id="myHDCurrenCustomerName" value="@ViewBag.CurrenCustomerName " />
+    <input type="hidden" id="myHDCurrentCustomerCompany" value="@ViewBag.CurrentCustomerCompany " />
+
+    <div class="col-md-12"><span class="wrong-field" data-bind="text: message"></span><br></div>
+
+
+
+    <div class="col-md-6">
+
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: salesChannelsUserList">
+                <div class="control-label col-md-5">
+                    Negocio
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        @*, optionsCaption: 'Seleccione un Canal de Venta ...'*@
+                        <li><select data-bind="options: salesChannelsUserList, optionsText: 'SalesChannelName', optionsValue: 'SalesChannelID', value: selectedSalesChannelID" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique el Negocio" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: customersList">
+                <div class="control-label col-md-5">
+                    Cliente
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: customersList, optionsText: 'Company', value: selectedCustomer, optionsCaption: isSellerUser() ? 'Seleccione un Cliente ...' : null" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique la razón social del Cliente" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group" data-bind="visible: customerIsSpot">*@
+        <div class="form-group">
+            <div class="row">
+                <div class="control-label col-md-5">
+                    Nombre de Contacto
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><input type="text" id="txtCustomerContactName" data-bind="value: customerContactName" class="form-control" style="width: 270px" /></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique el nombre de Contacto del Cliente Spot" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        @*</div>*@
+
+        <div class="form-group" data-bind="visible: customerIsSpot">
+            <div class="row">
+                <div class="control-label col-md-5">
+                    Nombre de la Empresa
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><input type="text" id="txtCustomerCompanyName" data-bind="value: customerCompanyName" class="form-control" style="width: 270px" /></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique la razón Social del Cliente Spot" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: productsList">
+                <div class="control-label col-md-5">
+                    Producto
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: productsList, optionsText: 'FullName', optionsValue: 'ProductID', value: selectedProductID, optionsCaption: 'Seleccione un Producto ...'" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Seleccione el producto que necesita. En el mismo podrá elegir también el tipo de envase y la marca o procedencia." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: saleModalityList">
+                <div class="control-label col-md-5">
+                    Modalidad Venta
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: saleModalityList, optionsText: 'Description', optionsValue: 'SaleModalityID', value: selectedSaleModalityID" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique qué tipo de servicio usted requiere. Ver recuadros explicativos 'Detalle Modalidad de Venta'" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: geographicAreaList">
+                <div class="control-label col-md-5">
+                    Lugar de entrega
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: geographicAreaList, optionsText: 'Name', value: selectedGeographicArea" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Especifique zona donde se entregará el producto. Si prefiere, también puede retirar de nuestros depositos." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: paymentDeadlineList">
+                <div class="control-label col-md-5">
+                    Condicion de Pago
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: paymentDeadlineList, optionsText: 'Description', value: selectedPaymentDeadline" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Seleccione el plazo de pago de la operación." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: quantityOpenPurchaseOrder">
+                <div class="control-label col-md-5">
+                    Cantidad Total Orden Compra (Kg)
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><input type="text" id="txtQuantityOpenPurchaseOrder" data-bind="commaDecimalFormatter: quantityOpenPurchaseOrder" class="form-control" style="width: 270px" /></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique el volumen total que Ud está dispuesto a comprar en las condiciones de esta cotización. Puede ser una orden de compra abierta, particionada en sucesivas entregas de volumenes mas pequeños" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: deliveryAmountList">
+                <div class="control-label col-md-5">
+                    Cantidad de Entregas
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: deliveryAmountList, optionsText: 'Description', value: selectedDeliveryAmount" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Señale en cuantas entregas Ud desea dividir la totalidad de su OC. Estas entregas pueden hacerse sucesivamente en el tiempo de acuerdo a su necesidad de stock." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: minimumQuantityDelivery">
+                <div class="control-label col-md-5">
+                    Cantidad Minima por Entrega (Kg)
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><input type="text" id="txtMinimumQuantityDelivery" data-bind="commaDecimalFormatter: minimumQuantityDelivery, enable:false" class="form-control" style="width: 270px" /> <!--, validationElement: minimumQuantityDelivery" />--></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Es el volumen de cada una de las entregas que integran la orden de compra. Equivale a la cantidad de la Orden de Compra dividido la Cantidad de Entregas" rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: maximumMonthsStockList">
+                <div class="control-label col-md-5">
+                    Máximo Tiempo en Stock (Meses)
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: maximumMonthsStockList, optionsText: 'Description', value: selectedMaximumMonthsStock" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indique el período máximo que la mercadería deberá quedar reservada para Ud en nuestros depositos hasta que se despache y facture la última entrega. Ud se comprometerá a recibir la totalidad del volumen de la Orden de compra antes del plazo consignado." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row" data-bind="validationElement: exchangeTypeList">
+                <div class="control-label col-md-5">
+                    Moneda de la Operación
+                </div>
+                <div class="col-md-7">
+                    <ul class="list-inline">
+                        <li><select data-bind="options: exchangeTypeList, optionsText: 'Description', value: selectedExchangeType" size="1" style="width: 270px" class="form-control"></select></li>
+                        <li><a tabindex="-1" class="" href="#" role="button" data-placement="top" title="Indica que usted podrá seleccionar entre pagar el precio consignado al tipo de cambio Fecha Factura (Pesos) o recibir Notas de Débito o Crédito según la variación del Dolar entre la Fecha Factura y la Fecha de Cobro (Dolar)." rel="tooltip"><i class="fas fa-info-circle fa-lg mt-5"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12"><span class="wrong-field" data-bind="text: message"></span><br></div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-5 col-md-6">
+                    <input type="button" value="Calcular Precio" id="btnCalcularPrecio" data-bind="click: $root.calculateProductQuote" class="btn btn-default not-form-default" style="width:100%" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-offset-5 col-md-6">
+                    <input type="button" value="Crear Cotizacion" data-bind="click: $root.createProductQuote, enable: canCreateProductQuote" class="btn btn-success" style="width:100%" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="control-label col-md-5">
+                    Precio (USD/Kg) (*)
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="txtPrice" data-bind="commaDecimalFormatter: price_View" disabled="disabled" class="form-control" style="width: 270px" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="control-label col-md-5">
+                    Importe Total por Entrega (USD)
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="txtPrice_PorEntrega" data-bind="commaDecimalFormatter: price_PorEntrega_View" disabled="disabled" class="form-control" style="width: 270px" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="control-label col-md-5">
+                    Importe Total Orden Compra (USD)
+                </div>
+                <div class="col-md-7">
+                    <input type="text" id="txtCustomerTotalCost" data-bind="commaDecimalFormatter: price_PorOC_View" disabled="disabled" class="form-control" style="width: 270px" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="control-label col-md-11">
+                (*) Los precios expuestos no incluyen IVA ni otros impuestos aplicables.
+            </div>
+        </div>
+        <div class="form-group" style="visibility:hidden">
+            <div class="row">
+                <div class="col-md-offset-5 col-md-7">
+                    <input type="button" value="Generar Excepcion" data-bind="click: $root.generateException, enable: canCreateProductQuote" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        <div class="form-group" data-bind="visible: observations() !== ''">
+            <div class="control-label col-md-11 bg-danger">
+                <span data-bind="text: observations"></span>
+            </div>
+        </div>
+        <div style="height:5px;"></div>
+
+        @* Comienzo Modificacion Parametros del Sistema *@
+        <div class="form-group" data-bind="visible: currentUserEditGlobalVariables">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingOne">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Modificar Parámetros del Cálculo</a>
+                            </h4>
+                        </div><!-- row -->
+
+                        <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Costo Almacenamiento (ARS/Mes/Posición):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtCostoAlmacenamientoMensual" data-bind="numericGeneral: gvd_costoAlmacenamientoMensual, commaDecimalFormatter: gvd_costoAlmacenamientoMensual, valueUpdate: 'afterkeydown'" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Costo IN-OUT (ARS/Posición):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtCostoInOut" data-bind="numericGeneral: gvd_costoInOut, commaDecimalFormatter: gvd_costoInOut, valueUpdate: 'afterkeydown'" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Costo Finananciero (TEM %):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtCostoFinancieroMensual" data-bind="numericGeneral: gvd_costoFinancieroMensual, commaDecimalFormatter: gvd_costoFinancieroMensual" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Impuesto Débito/Credito (%):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtImpuestoDebitoCredito" data-bind="numericGeneral: gvd_impuestoDebitoCredito, commaDecimalFormatter: gvd_impuestoDebitoCredito" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Gastos Fijos (%):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtGastosFijos" data-bind="numericGeneral: gvd_gastosFijos, commaDecimalFormatter: gvd_gastosFijos" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Tipo Cambio (ARS/USD):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtTipoCambio" data-bind="numericGeneral: gvd_tipoCambio, commaDecimalFormatter: gvd_tipoCambio" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Factor Tiempo en Stock:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtFactorCostoAlmacenamientoMensual" data-bind="numericGeneral: gvd_factorCostoAlmacenamientoMensual, commaDecimalFormatter: gvd_factorCostoAlmacenamientoMensual" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Dias Stock Promedio Dist. Local:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtDiasStockPromedioDistLocal" data-bind="numericGeneral: gvd_diasStockPromedioDistLocal, commaDecimalFormatter: gvd_diasStockPromedioDistLocal" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <input type="button" value="Reestablecer Valores por Defecto" data-bind="click: $root.resetGetGlobalVariables" class="btn btn-primary" />
+                                        </div><!-- col -->
+                                    </div><!-- form-group -->
+
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Flete a Cliente (ARS):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtCostoFleteInput" data-bind="numericGeneral: costoFleteInput, commaDecimalFormatter: costoFleteInput" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Dirección de Entrega:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtDeliveryAddress" data-bind="value: deliveryAddress" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Disponibilidad (Días Hábiles):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtAvailabilityDays" data-bind="numericGeneral: availabilityDays, commaDecimalFormatter: availabilityDays" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Fechas de Entregas:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtDatesDeliveryInput" data-bind="value: datesDeliveryInput" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->                                    
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Valor Rofex:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtFactorRofexInput" data-bind="numericGeneral: factorRofexInput, commaDecimalFormatter: factorRofexInput" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Comisión (%):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="text" id="txtSellerCommissionInput" data-bind="numericGeneral:sellerCommissionInput, commaDecimalFormatter: sellerCommissionInput, valueUpdate: 'afterkeydown'" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Validez del Precio (Fecha):</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            <input type="date" id="txtProductValidityOfPriceInput" data-bind="value: productValidityOfPriceInput" class="form-control" />
+                                        </div>
+                                    </div><!-- form-group -->
+                                    <div class="form-group">
+                                        <label for="input" class="col-xs-12 col-sm-7 control-label">Observaciones:</label>
+                                        <div class="col-xs-12 col-sm-5">
+                                            @*<input type="text" id="txtUserObservations" data-bind="value: userObservations" class="form-control" />*@
+                                            <textarea rows="5" type="text" data-bind="value: userObservations" maxlength="250" class="form-control"></textarea>
+
+                                        </div>
+                                    </div><!-- form-group -->
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* Fin Modificacion Parametros del Sistema *@
+
+        @* Comienzo Modificacion de Precio/Margen *@
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel-group" data-bind="visible: currentUserEditMarginOrPrice">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">Modificar Precio/Márgen</a>
+                                </h4>
+                            </div><!-- row -->
+
+                            <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                <div class="panel-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label for="input" class="col-xs-12 col-sm-7 control-label">Precio (USD/Kg):</label>
+                                            <div class="col-xs-12 col-sm-5">
+                                                <input type="text" id="txtPrecioInput" data-bind="numericGeneral:precioInput, commaDecimalFormatter: precioInput, valueUpdate: 'afterkeydown'" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input" class="col-xs-12 col-sm-7 control-label">Margen Neto (%):</label>
+                                            <div class="col-xs-12 col-sm-5">
+                                                <input type="text" id="txtMargenInput" data-bind="numericGeneral:margenInput, commaDecimalFormatter: margenInput, valueUpdate: 'afterkeydown'" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="input" class="col-xs-12 col-sm-7 control-label">Margen Neto (USD):</label>
+                                            <div class="col-xs-12 col-sm-5">
+                                                @*<input type="text" id="txtMargenUSDInput" data-bind="numericGeneral:margenUSDInput, commaDecimalFormatter: margenUSDInput, valueUpdate: 'afterkeydown'" class="form-control" />*@
+                                                <input type="text" id="txtMargenUSDInput" data-bind="commaDecimalFormatter: margenUSDInput, valueUpdate: 'afterkeydown'" class="form-control" />
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div><!-- panel-body -->
+                            </div><!-- panel-collapse -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        @* Fin Modificacion de Precio/Margen *@
+
+
+    </div>
+
+
+    <div class="col-md-6">
+        @* Comienzo Detalle de Producto *@
+        <div class="panel-group">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12 detalle-producto">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingThree">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#collapse1" href="#collapseThree" aria-expanded="true" aria-controls="collapseThree">Detalle Producto</a>
+                                </h4>
+                            </div><!-- panel-heading -->
+                            <div id="collapseThree" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingThree">
+                                <div class="panel-body pb-5">
+                                    <ul>
+                                        <li><strong>Nombre Producto:</strong> <span data-bind="text: productSingleName"></span></li>
+                                        <li><strong>Marca/Origen:</strong> <span data-bind="text: productBrandName"></span></li>
+                                        <li><strong>Empresa Vendedora:</strong> <span data-bind="text: productSellerCompanyName"></span></li>
+                                        <li><strong>Capacidad FCL (Kg):</strong> <span data-bind="commaDecimalFormatter: productFCLKilogram"></span></li>
+                                        <li><strong>Envase:</strong> <span data-bind="text: productPackagingName"></span></li>
+                                        <li><strong>Validez Precio:</strong> <span data-bind="text: productValidityOfPrice_view"></span></li>
+                                        <li><strong>Unidad Mínima de Venta (Kg):</strong> <span data-bind="commaDecimalFormatter: productPositionKilogram"></span></li>
+                                        <li><strong>Observaciones:</strong> <span data-bind="text: productClientObservations"></span></li>
+                                        <li>
+                                            <strong>Documentos:</strong>
+                                            <p>
+                                                <div data-bind="visible: productDocuments().length>0">
+                                                    <button type="button" class="btn btn-primary btn-sm" data-bind="template: { name: template, foreach: productDocuments }"></button>
+                                                </div>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @* Fin Detalle de Producto *@
+
+        @* Comienzo Detalle Modalidades *@
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12 detalle-modalidad">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="headingFour">
+                            <h4 class="panel-title">
+                                <a role="button" data-toggle="collapse" data-parent="#collapse2" href="#collapseFour" aria-expanded="true" aria-controls="collapseFour">Detalle Modalidad de Venta</a>
+                            </h4>
+                            <button type="button" class="btn btn-primary btn-sm pull-right" data-toggle="modal" data-target=".bs-example-modal-lg">Ver todas</button>
+                            
+                        </div><!-- panel-heading -->
+                        <div id="collapseFour" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFour">
+                            <div class="panel-body pb-5">
+                                <ul>
+                                    <li><strong><span data-bind="text: saleModalityDescription"></span> </strong> <span data-bind="html: saleModalityResume"></span></li>
+                                </ul>
+                            </div><!-- panel-body -->
+                        </div><!-- panel-collapse -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @* Fin Detalle de Modalidades *@
+    </div>
+
+
+    @* Comienzo de Costeo *@
+    <div class="col-md-12" data-bind="visible: canShowCosteo && showCosteo">
+        <div style="height:15px;"></div>
+        <div class="panel-group">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab" id="headingFive">
+                                <h4 class="panel-title">
+                                    <a role="button" data-toggle="collapse" data-parent="#accordion3" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">Detalle del Costeo</a>
+                                </h4>
+                            </div><!-- row -->
+                            <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingFive">
+                                <div class="panel-body table-responsive">
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 25%">
+                                            <col style="width: 10%">
+                                            <col style="width: 11%">
+                                            <col style="width: 18%">
+                                            <col style="width: 18%">
+                                            <col style="width: 18%">
+                                        </colgroup>
+                                        <tr class="gris">
+                                            <th>CONCEPTO</th>
+                                            <th>ORIGEN</th>
+                                            <th>VALOR</th>
+                                            <th>PRECIO UNI. (USD/KG)</th>
+                                            <th>ENTREGA (USD)</th>
+                                            <th>ORDEN COMPRA (USD)</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Cantidad (Kg.)</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td>1</td>
+                                            <td><span data-bind="commaDecimalFormatter: minimumQuantityDelivery"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: quantityOpenPurchaseOrder"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo del Producto (USD)</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td></td>
+                                            <td><span data-bind="commaDecimalFormatter: costoProducto_PorTON"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: costoProducto_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: costoProducto_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Flete a Cliente (ARS)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: flete_PorITEM"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: flete_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: flete_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: flete_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Almacenamiento (ARS/MES/Posicion)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: almacenamientoCosto_PorITEM"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: almacenamientoCosto_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: almacenamientoCosto_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: almacenamientoCosto_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">IN/OUT (ARS/Posicion)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="text: inout_PorITEM_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: inout_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: inout_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: inout_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Mermas (% sobre costo Producto)</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td><span data-bind="commaDecimalFormatter: merma_PorITEM"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: merma_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: merma_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: merma_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Comisiones (% sobre precio)</td>
+                                            <td class="colText">CLIENTE</td>
+                                            <td><span data-bind="commaDecimalFormatter: comisiones_PorITEM"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: comisiones_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: comisiones_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: comisiones_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Gastos Fijos (% sobre precio)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="commaDecimalFormatter: gastosFijos_PorITEM"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: gastosFijos_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: gastosFijos_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: gastosFijos_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo Financiero (% sobre precio)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: costoFinancieroMensual_PorITEM_View"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: costoFinancieroMensual_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: costoFinancieroMensual_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: costoFinancieroMensual_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo Seguro Cambiario (% sobre precio)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: exchangeInsurance_View"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: exchangeInsurance_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: exchangeInsurance_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: exchangeInsurance_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">IIBB (% sobre precio)</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td><span data-bind="commaDecimalFormatter: iibbAlicuota_PorITEM"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: iibbAlicuota_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: iibbAlicuota_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: iibbAlicuota_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Impuesto D/C (% sobre precio)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="commaDecimalFormatter: impuestoDC_PorITEM"></span>%</td>
+                                            <td><span data-bind="commaDecimalFormatter: impuestoDC_PorTON_View"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: impuestoDC_PorEntrega"></span></td>
+                                            <td><span data-bind="commaDecimalFormatter: impuestoDC_PorOC"></span></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow"><strong>COSTO TOTAL</strong></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"><span data-bind="commaDecimalFormatter: customerTotalCost_View"></span></td>
+                                            <td class="colLightYellow"><span data-bind="commaDecimalFormatter: customerTotalCost_PorEntrega"></span></td>
+                                            <td class="colLightYellow"><span data-bind="commaDecimalFormatter: customerTotalCost_PorOC"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>&nbsp;</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="gris">
+                                            <td class="colText colYellow"><strong>CALCULO INICIAL</strong></td>
+                                            <td class="colText colYellow"></td>
+                                            <td class="colText colYellow"></td>
+                                            <td class="colText colYellow"></td>
+                                            <td class="colText colYellow"></td>
+                                            <td class="colText colYellow"></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow"><strong>Precio de Venta (USD/Kg)</strong></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: priceOriginal_View"></span></strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: priceOriginal_PorEntrega"></span></strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: priceOriginal_PorOC"></span></strong></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td><strong>Margen Neto (USD)</strong></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalUSD_PorTON_View"></span></strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalUSD_PorEntrega_View"></span></strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalUSD_PorOC_View"></span></strong></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow"><strong>Margen Neto (%)</strong></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalPorc_PorTON"></span>%</strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalPorc_PorEntrega"></span>%</strong></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: margenNetoOriginalPorc_PorOC"></span>%</strong></td>
+                                        </tr>
+
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow"><strong>ROI (%)</strong></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colLightYellow"><strong><span data-bind="commaDecimalFormatter: workingCapitalROI"></span>%</strong></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow">Margenes Utilizados</td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colText colLightYellow" colspan="2"><span data-bind="text: margenNetoEntidadOrigen"></span></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr class="gris-50">
+                                            <td class="colText colLightYellow">Tiene Excepción </td>
+                                            <td class="colLightYellow"></td>
+                                            <td class="colText colLightYellow" colspan="2"><span data-bind="text: captionWayOfException"></span></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <!--INPUT DEL CLIENTE-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 45%">
+                                            <col style="width: 20%">
+                                        </colgroup>
+                                        <tr class="gris">
+                                            <th>INPUT DEL CLIENTE</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Producto</td>
+                                            <td><span data-bind="text: productName"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Es Compra-Venta Directa?</td>
+                                            <td><span data-bind="text: productBuyAndSellDirect_View"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Tiene Almacenamiento In/Out?</td>
+                                            <td><span data-bind="text: productInOutStorage_View"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Modalidad Venta</td>
+                                            <td><span data-bind="text: saleModalityDescription"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isSaleModalityFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Lugar de entrega</td>
+                                            <td><span data-bind="text: geographicAreaName"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isGeographicAreaFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Condición de Pago</td>
+                                            <td><span data-bind="text: paymentDeadlineName"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isPaymentDeadlineFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Cantidad Total Orden de Compra (Kg) </td>
+                                            <td><span data-bind="commaDecimalFormatter: quantityOpenPurchaseOrder"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isQuantityOpenPurchaseOrderFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Cantidad de Entregas</td>
+                                            <td><span data-bind="text: deliveryAmount"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isDeliveryAmountFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Cantidad Minima por Entrega (Kg)</td>
+                                            <td><span data-bind="commaDecimalFormatter: minimumQuantityDelivery"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isMinimumQuantityDeliveryFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Máximo Tiempo en Stock (Meses)</td>
+                                            <td><span data-bind="text: maximumMonthsStock"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isMaximumMonthsStockFindParam())"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Moneda de la Operación </td>
+                                            <td><span data-bind="text: exchangeTypeName"></span></td>
+                                            <td><span data-bind="text: exceptionParamTypeDesc(isExchangeTypeFindParam())"></span></td>
+                                        </tr>
+                                    </table>
+                                    <!--PARAMETROS DEL SISTEMA-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 20%">
+                                            <col style="width: 45%">
+                                        </colgroup>
+                                        <tr class="gris">
+                                            <th>PARAMETROS DEL SISTEMA</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo Almacenamiento (ARS/Mes/Posición)</td>
+                                            <td><span data-bind="text: gv_CostoAlmacenamientoMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo IN-OUT (ARS/Posición)</td>
+                                            <td><span data-bind="text: inout_PorITEM"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo Financiero (TEM %)</td>
+                                            <td><span data-bind="commaDecimalFormatter: gv_CostoFinancieroMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Impuesto Débito/Crédito (%)</td>
+                                            <td><span data-bind="commaDecimalFormatter: impuestoDC_PorITEM"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Gastos Fijos (%)</td>
+                                            <td><span data-bind="commaDecimalFormatter: gastosFijos_PorITEM"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Tipo Cambio (ARS/USD)</td>
+                                            <td><span data-bind="commaDecimalFormatter: typeChange"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Factor Tiempo en Stock</td>
+                                            <td><span data-bind="commaDecimalFormatter: gv_FactorCostoAlmacenamientoMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Días Stock Promedio Dist. Local</td>
+                                            <td><span data-bind="text: gv_DiasStockPromedioDistLocal"></span></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <!--CALCULO FLETE-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+
+                                        <tr class="gris">
+                                            <th>CALCULO FLETE</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>Flete a Cliente (USD/Kg)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: flete_PorTON_View"></span></strong></td>
+                                            <td class="colText">[Flete a Cliente (USD por entrega)] /  [Cantidad Minima de Entrega (Kg)]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Flete a Cliente (ARS por Orden de Compra)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="text: flete_PorITEM"></span></td>
+                                            <td class="colText"><span data-bind="text: leyendaCalculoCostoTransporte"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Flete a Cliente (USD por Orden de Compra)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: flete_PorITEMUSD"></span></td>
+                                            <td class="colText">[Flete a Cliente (ARS por Orden de Compra)] / [Tipo de Cambio (ARS/USD)]</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="colText">Tipo de Carga</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td><span data-bind="text: freightType"></span></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <!--CALCULO ALMACENAMIENTO-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+
+                                        <tr class="gris">
+                                            <th>CALCULO ALMACENAMIENTO</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>Almacenamiento (USD/Kg)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: almacenamientoUSDKg"></span></strong></td>
+                                            <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30 / [Tipo Cambio (ARS/USD)] / 1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo Almacenamiento (ARS/Mes/Posición)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="text: gv_CostoAlmacenamientoMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Tiempo Medio en Stock (Días)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="text: tiempoMedioStockDias"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Almacenamiento (ARS/Posición)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="text: almacenamientoARS"></span></td>
+                                            <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Almacenamiento (USD/Posición)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: almacenamientoUSD"></span></td>
+                                            <td class="colText">[Costo Almacenamiento (ARS/Mes/Posición)] * [Tiempo Medio en Stock (Días)] / 30 / [Tipo Cambio (ARS/USD)]</td>
+                                        </tr>
+                                    </table>
+                                    <!--CALCULO IN/OUT-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+
+                                        <tr class="gris">
+                                            <th>CALCULO IN/OUT</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>IN/OUT (USD/Kg)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: inout_USDKg"></span></strong></td>
+                                            <td class="colText">[Costo IN-OUT (ARS/Kg)] / [Tipo Cambio (ARS/USD)] / 1000</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Costo IN-OUT (ARS/Kg)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="text: inout_PorITEM"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">IN/OUT (USD/Posición)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: inout_USD"></span></td>
+                                            <td class="colText">[Costo IN-OUT (ARS/Kg)] / [Tipo Cambio (ARS/USD)]</td>
+                                        </tr>
+                                    </table>
+                                    <!--CALCULO FINANCIACIÓN-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+
+                                        <tr class="gris">
+                                            <th>CALCULO FINANCIACIÓN</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>Costo Financiero (% sobre precio)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: costoFinancieroMensual_PorITEM_View"></span></strong></td>
+                                            <td><span data-bind="text: costoFinancieroMensual_PorITEM_Formula"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Capital de Trabajo (Días)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: workingCapital"></span></td>
+                                            <td><span data-bind="text: workingCapital_Formula"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Costo Financiero (TEM %)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="commaDecimalFormatter: gv_CostoFinancieroMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
+                                        <tr>
+                                            <td class="colText"><strong>Capital de Trabajo (Días)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: workingCapital"></span></strong></td>
+                                            <td><span data-bind="text: workingCapital_Formula"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Plazo Pago Proveedor (Días desde Factura)</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td><span data-bind="text: productProviderPaymentDeadline"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Lead Time (Días desde Factura)</td>
+                                            <td class="colText">PRODUCTO</td>
+                                            <td><span data-bind="text: productLeadTime"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Tiempo Medio en Stock (Días)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="text: tiempoMedioStockDias"></span></td>
+                                            <td><span data-bind="text: tiempoMedioStockDias_Formula"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Condición de Pago (Días desde Factura)</td>
+                                            <td class="colText">INPUT</td>
+                                            <td><span data-bind="text: paymentDeadlineDays"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Promedio de Atraso en el Pago (Días)</td>
+                                            <td class="colText">CLIENTE</td>
+                                            <td><span data-bind="commaDecimalFormatter: customerDelayAverageDays"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td><td></td><td></td><td></td></tr>
+                                        <tr>
+                                            <td class="colText"><strong>Tiempo Medio en Stock (Días)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="text: tiempoMedioStockDias"></span></strong></td>
+                                            <td><span data-bind="text: tiempoMedioStockDias_Formula"></span></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Máximo Tiempo en Stock (Días)</td>
+                                            <td class="colText">INPUT</td>
+                                            <td><span data-bind="text: maximoTiempoStockDias"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Factor Tiempo en Stock</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="commaDecimalFormatter: gv_FactorCostoAlmacenamientoMensual"></span></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Stock Promedio Dist. Local (Días)</td>
+                                            <td class="colText">SISTEMA</td>
+                                            <td><span data-bind="text: gv_DiasStockPromedioDistLocal"></span></td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                    <!--CALCULO COSTO SEGURO CAMBIARIO-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+                                        <tr class="gris">
+                                            <th>CALCULO COSTO SEGURO CAMBIARIO</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>Costo Seguro Cambiario (% sobre precio)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: exchangeInsurance_View"></span></strong></td>
+                                            <td class="colText">SI PESOS => 1 - [Tipo Cambio (ARS/USD)] / [ROFEX (Condición de Pago + Promedio de Atraso en el Pago Días)]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Condición de Pago (Días desde Factura)</td>
+                                            <td class="colText">INPUT</td>
+                                            <td><span data-bind="commaDecimalFormatter: paymentDeadlineDays"></span></td>
+                                            <td class="colText"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">Promedio de Atraso en el Pago (Días)</td>
+                                            <td class="colText">CLIENTE</td>
+                                            <td><span data-bind="commaDecimalFormatter: customerDelayAverageDays"></span></td>
+                                            <td class="colText"></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText">ROFEX (Condición de Pago + Promedio de Atraso en el Pago Días)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: valorRofex"></span></td>
+                                            <td class="colText">Busca [ROFEX] según [Condicion de Pago] + Promedio de Atraso en el Pago Dias</td>
+                                        </tr>
+
+
+                                    </table>
+                                    <!--CALCULO ROI-->
+                                    <table class="table table-hover table-condensed">
+                                        <colgroup>
+                                            <col style="width: 35%">
+                                            <col style="width: 10%">
+                                            <col style="width: 20%">
+                                            <col style="width: 35%">
+                                        </colgroup>
+
+                                        <tr class="gris">
+                                            <th>CALCULO ROI</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"><strong>Rentabilidad del Capital de Trabajo (ROI %)</strong></td>
+                                            <td class="colText"><strong>CALCULO</strong></td>
+                                            <td><strong><span data-bind="commaDecimalFormatter: workingCapitalROI"></span></strong></td>
+                                            <td>[Margen Operativo (% sobre Precio)] * [Rotación del Capital de Trabajo]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Margen Operativo (%)</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: margenBrutoPORCRofex"></span></td>
+                                            <td>[Margen Neto (%)] + [Costo Financiero (% sobre precio)]</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="colText"> - Rotación del Capital de Trabajo</td>
+                                            <td class="colText">CALCULO</td>
+                                            <td><span data-bind="commaDecimalFormatter: workingCapitalRotation"></span></td>
+                                            <td>360 (días) / [Capital de Trabajo (Días)]</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @* Fin de Costeo *@
+
+</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modalidades</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <img src="~/Content/images/grillamodalidades.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/html" id="templateA">
+    @* <table>*@
+    <tr>
+        <td> <a data-bind="attr: { href: '../Documents/Products/'+ProductDocumentPDF, title: Description, target: '_blank' }"><span data-bind="text: Description" class="pull-left"></span></a></td>
+    </tr>
+    @* </table>*@
+</script>
+<script src="~/Scripts/ViewModels/ProductQuoteViewModel.js?2.2.0.0"></script>
+<script>
+   
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+        $("[rel=tooltip]").tooltip({ html: true });
+    });
+
+    $(document).keydown(function (e) {
+        if (e.keyCode == 116 && e.ctrlKey) {
+            //alert('ctrl + F5');
+            var calcularprecio = document.getElementById('btnCalcularPrecio');
+            calcularprecio.click();
+            return false;
+        }
+    });
+</script>
+

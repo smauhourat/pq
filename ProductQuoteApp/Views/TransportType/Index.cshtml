@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.TransportType>
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyTransportTypes;
+}
+
+<div class="row" style="margin-bottom:25px;">
+    <h3>@ProductQuoteApp.Resources.Resources.EtyTransportTypes</h3>
+</div>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PositionQuantityFrom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PositionQuantityTo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FreightType)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PositionQuantityFrom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PositionQuantityTo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FreightType.Description)
+        </td>
+        <td>
+            <a title="@ProductQuoteApp.Resources.Resources.ActEdit" href="@Url.Action("Edit", "TransportType", new { id = item.TransportTypeID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "TransportType", new { id = item.TransportTypeID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "TransportType", new { id = item.TransportTypeID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.ProductDocument>
+
+@{
+    ViewBag.Title = "Documentos del Producto";
+}
+
+<h3>Documentos</h3>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "ProductDocumentsCreate", "Product", new { productID = @ViewBag.ProductID }, null)
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            Documento
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            <a href="~/Documents/Products/@Html.DisplayFor(modelItem => item.ProductDocumentPDF)" target="_blank">Descargar</a> |
+            @*@Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDelete, "ProductDocumentsDelete", new { id = item.ProductDocumentID })*@
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActDelete, "ProductDocumentsDelete", new { productID = @ViewBag.ProductID, id = item.ProductDocumentID }, null)
+        </td>
+        <td>
+            
+        </td>
+    </tr>
+}
+
+</table>
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>

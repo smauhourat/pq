@@ -1,0 +1,477 @@
+﻿@using Microsoft.AspNet.Identity
+@using ProductQuoteApp.Library;
+@using ProductQuoteApp.Helpers
+@model PagedList.IPagedList<ProductQuoteApp.Models.ProductQuoteViewModel>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyProductQuotes;
+}
+
+<h3>
+    @if (ViewBag.Pq == 1)
+    {
+        if (HttpContext.Current.User.IsInRole("CustomerUser"))
+        {
+            @Html.Raw("Mis Cotizaciones")
+        }
+        else
+        {
+            @Html.Raw("Cotizaciones")
+        }
+
+    }
+    @if (ViewBag.Pq == 0)
+    {
+        if (HttpContext.Current.User.IsInRole("CustomerUser"))
+        {
+            @Html.Raw("Mis Ordenes de Compras")
+        }
+        else
+        {
+            @Html.Raw("Ordenes de Compras")
+        }
+    }
+
+</h3>
+
+@using (Html.BeginForm("Index", "ProductQuote", FormMethod.Get))
+{
+    <div class="control-group">
+        <div class="controls form-inline">
+            @Html.TextBox("SearchString", ViewBag.filter as string, new { @placeholder = "Buscar", @title = "Buscar por Cliente, Producto, Proveedor..", @class = "form-control" })
+            <label for="FechaDesde">Fecha Desde:</label> @Html.TextBox("FechaDesde", ViewBag.fechaDesde as string, new { @type = "date", @class = "form-control" })
+            @*<label for="FechaDesde">Fecha Desde:</label> @Html.TextBox("FechaDesde", (object)ViewBag.fechaDesde == null ? "2021-01-01" : (string)ViewBag.fechaDesde, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })*@
+            <label for="FechaHasta">Fecha Hasta:</label> @Html.TextBox("FechaHasta", ViewBag.fechaHasta as string, new { @type = "date", @class = "form-control" })
+            @Html.DropDownList("ProductQuoteStatusID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.Hidden("pq", ViewBag.Pq as string)
+            @Html.Hidden("customerID", ViewBag.CustomerID as string)
+            <input type="submit" value="Buscar" class="btn btn-default" />
+        </div>
+    </div>
+
+}
+<p></p>
+@using (Html.BeginForm("ExportToExcel", "ProductQuote", FormMethod.Post))
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Cotización", "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, sortOrder = ViewBag.ProductQuoteCodeSortParm, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta })
+            </th>
+            @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+            {
+                <th>
+                    @Html.ActionLink("Usuario", "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, sortOrder = ViewBag.UserFullNameSortParm, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta })
+                </th>
+            }
+            <th>
+                @Html.ActionLink("Cliente", "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, sortOrder = ViewBag.CustomerCompanySortParm, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta })
+            </th>
+            <th>
+                @Html.ActionLink("Fecha", "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, sortOrder = ViewBag.FechaSortParm, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta })
+            </th>
+            @if (ViewBag.Pq == 1)
+            {
+                <th>
+                    Validez Precio
+                </th>
+
+            }
+            <th>
+                @Html.ActionLink("Producto", "Index", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, sortOrder = ViewBag.ProductSortParm, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta })
+            </th>
+            <th>
+                Estado
+            </th>
+
+            <th align="right">
+                @ProductQuoteApp.Resources.Resources.PtyPrice
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuoteCode)
+                </td>
+                @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser"))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserInitials)
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerCompany)
+                </td>
+                @if (ViewBag.Pq == 1)
+                {
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.DateQuote)
+                    </td>
+                }
+                else
+                {
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.CustomerOrder.DateOrderView)
+                    </td>
+                }
+                @if (ViewBag.Pq == 1)
+                {
+                    <td nowrap>
+                        @Html.DisplayFor(modelItem => item.ProductValidityOfPrice)
+                    </td>
+                }
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductQuoteStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price_View)
+                </td>
+                <td>
+                    @*@if ((item.CustomerOrder == null) && (item.ProductQuoteStatus == "Vigente"))
+                        {
+                            if (!item.ExpressCalc)
+                            {
+                                @Html.ActionLink("Crear OC", "../CustomerOrders/Create", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, productQuoteID = item.ProductQuoteID })
+                            }
+                        }*@
+
+                    @*@if (item.ProductQuoteStatus == "Vencida")
+                        {
+                            @Html.ActionLink("Razones Vencimiento", "/DueDateReason", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })
+                        }*@
+                </td>
+                <td>
+                    @Html.ActionLink("Razones Cierre", "/ReasonsForClosure", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })
+                </td>
+                <td>
+                    @if (ViewBag.Pq == 1) //Cotizacion
+                    {
+                        if (item.ProductQuoteStatus == "Abierta")
+                        {
+                            @Html.ActionLink("Enviar", "Sent", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })
+                        }
+                    }
+                </td>
+                <td nowrap>
+                    <div style="display: inline-block;width:80px;">
+
+                        @if (ViewBag.Pq == 1) //Cotizacion
+                        {
+                            if (item.ExpressCalc)
+                            {
+                                <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("DetailsExpress", "ProductQuote", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                            }
+                            else
+                            {
+                                <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "ProductQuote", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                            }
+                        }
+                        else
+                        {
+                            if (item.ExpressCalc)
+                            {
+                                <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("DetailsExpress", "CustomerOrders", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                            }
+                            else
+                            {
+                                <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "CustomerOrders", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                            }
+                        }
+                        @if (!item.ExpressCalc)
+                        {
+                            <a title="Descargar Cotizacion (PDF)" href="~/Documents/Export/@Html.DisplayFor(modelItem => item.ProductQuotePDF)" target="_blank"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-file-pdf'></i></div></a>
+                        }
+
+                        @if (!string.IsNullOrEmpty(item.ProductQuoteSmallPDF) && item.ExpressCalc)
+                        {
+                            <a title="Descargar Cotizacion Reducida (PDF)" href="~/Documents/Export/@Html.DisplayFor(modelItem => item.ProductQuoteSmallPDF)" target="_blank"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-file-pdf'></i></div></a>
+                        }
+
+                        @if (ViewBag.Pq == 0) //Orden de Compra
+                        {
+                            <a title="Seguimiento Orden de Compra" data-id="@item.ProductQuoteID" href="javascript:void(0);" class="linkDetalle"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-list-ul'></i></div></a>
+                        }
+
+                        @if (Request.IsAuthenticated && HttpContext.Current.User.IsInRole("AdminUser") && (ViewBag.Pq == 0)) //Orden de Compra
+                        {
+                            <a title="Edicion Seguimiento Orden de Compra" href="@Url.Action("Edit", "ShipmentTracking", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+                        }
+
+                    </div>
+                </td>
+                <td>
+                    @if (HttpContext.Current.User.IsInRole("AdminUser") || HttpContext.Current.User.IsInRole("CustomerAdminUser") || HttpContext.Current.User.IsInRole("SellerUser") || HttpContext.Current.User.IsInRole("CustomerUser"))
+                    {
+                        if (ViewBag.Pq == 1) //Cotizacion
+                        {
+                            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "ProductQuote", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+                        }
+                        else
+                        {
+                            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "CustomerOrders", new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, id = item.ProductQuoteID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+                        }
+
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    <input type="submit" value="Exportar a Excel" class="btn btn-default" />
+}
+
+@*https://www.c-sharpcorner.com/article/showing-data-using-jquery-ajax-call-json-in-Asp-Net-mvc/*@
+<!-- The Modal -->
+<div class="modal" id="ShipmentTrackingUI">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Seguimiento Cotizacion Nro.: <span id="PQCode"></span></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <table class="table">
+                    <tr>
+                        <th>
+
+                        </th>
+                        <th>
+                            Fecha Estimada
+                        </th>
+                        <th>
+                            Fecha Real
+                        </th>
+                        <th>
+
+                        </th>
+                    </tr>
+                    <tr>
+                        <td><span id="QuotedIcon"></span></td>
+                        <td><span id="QuotedEstimatedDate"></span></td>
+                        <td><span id="QuotedRealDate"></span></td>
+                        <td><span id="QuotedCompleted"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="CustomerOrderIcon"></span></td>
+                        <td><span id="CustomerOrderEstimatedDate"></span></td>
+                        <td><span id="CustomerOrderRealDate"></span></td>
+                        <td><span id="CustomerOrderCompleted"></span></td>
+                    </tr>
+                    <tr>
+                        <td><span id="ApprovedIcon"></span></td>
+                        <td><span id="ApprovedEstimatedDate"></span></td>
+                        <td><span id="ApprovedRealDate"></span></td>
+                        <td><span id="ApprovedCompleted"></span></td>
+                    </tr>
+                    <tr id="InProductionRow">
+                        <td><span id="InProductionIcon"></span></td>
+                        <td><span id="InProductionEstimatedDate"></span></td>
+                        <td><span id="InProductionRealDate"></span></td>
+                        <td><span id="InProductionCompleted"></span></td>
+                    </tr>
+                    <tr id="ETDRow">
+                        <td><span id="ETDIcon"></span></td>
+                        <td><span id="ETDEstimatedDate"></span></td>
+                        <td><span id="ETDRealDate"></span></td>
+                        <td><span id="ETDCompleted"></span></td>
+                    </tr>
+                    <tr id="ETARow">
+                        <td><span id="ETAIcon"></span></td>
+                        <td><span id="ETAEstimatedDate"></span></td>
+                        <td><span id="ETARealDate"></span></td>
+                        <td><span id="ETACompleted"></span></td>
+                    </tr>
+                    <tr id="NationalizedRow">
+                        <td><span id="NationalizedIcon"></span></td>
+                        <td><span id="NationalizedEstimatedDate"></span></td>
+                        <td><span id="NationalizedRealDate"></span></td>
+                        <td><span id="NationalizedCompleted"></span></td>
+                    </tr>
+                    <tr id="DeliveredRow">
+                        <td><span id="DeliveredIcon"></span></td>
+                        <td><span id="DeliveredEstimatedDate"></span></td>
+                        <td><span id="DeliveredRealDate"></span></td>
+                        <td><span id="DeliveredCompleted"></span></td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br />
+
+@*https://www.c-sharpcorner.com/UploadFile/092589/implementing-modal-pop-up-in-mvc-application/*@
+@*https://www.c-sharpcorner.com/article/showing-data-using-jquery-ajax-call-json-in-Asp-Net-mvc/*@
+@section scripts {
+    <script>
+
+        function formatDate(arg) {
+            return arg != undefined ? moment(arg).format('DD/MM/YYYY') : "&nbsp;";
+        }
+
+        function formatIcon(icon, description, completed) {
+            var iconColor = completed != undefined && completed == true ? 'Tomato' : 'Grey';
+            var ret = "<div style='font-size:1.5em; color:" + iconColor + "; display: inline-block;'><i class='" + icon + "'></i></div>&nbsp;&nbsp;<strong>" + description + "</strong>";
+
+            return ret;
+        }
+
+        function formatIconCheck(completed) {
+            var iconName = completed != undefined && completed == true ? 'fa fa-check' : 'fa fa-times';
+            var iconColor = completed != undefined && completed == true ? 'Green' : 'Red';
+
+            var ret = "<div style='font-size:1.5em; color:" + iconColor + "; display: inline-block;'><i class='" + iconName + "'></i></div>";
+
+            return ret;
+        }
+
+        var ShipmentTrackingURL = '../GetShipmentTracking/';
+        $(function () {
+            $(".linkDetalle").click(function () {
+                //debugger;
+                var $buttonClicked = $(this);
+                var id = $buttonClicked.attr('data-id');
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: ShipmentTrackingURL,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id },
+                    datatype: "json",
+                    success: function (data) {
+                        //debugger;
+                        var object = $.parseJSON(data);
+                        console.log(object);
+
+                        $('#PQCode').html(object.ProductQuoteCode);
+
+                        //Quoted
+                        $('#QuotedIcon').html(formatIcon('fa fa-calculator', 'Cotizado', object.QuotedCompleted));
+                        if (object.QuotedRealDate == undefined) {
+                            $('#QuotedEstimatedDate').html(formatDate(object.QuotedEstimatedDate));
+                        }
+                        $('#QuotedRealDate').html(formatDate(object.QuotedRealDate));
+                        $('#QuotedCompleted').html(formatIconCheck(object.QuotedCompleted));
+
+                        //CustomerOrder
+                        $('#CustomerOrderIcon').html(formatIcon('fa fa-tasks', 'Orden de Compra', object.CustomerOrderCompleted));
+                        if (object.CustomerOrderRealDate == undefined) {
+                            $('#CustomerOrderEstimatedDate').html(formatDate(object.CustomerOrderEstimatedDate));
+
+                        }
+                        $('#CustomerOrderRealDate').html(formatDate(object.CustomerOrderRealDate));
+                        $('#CustomerOrderCompleted').html(formatIconCheck(object.CustomerOrderCompleted));
+
+                        //Approved
+                        $('#ApprovedIcon').html(formatIcon('fa fa-check-square', 'Aprobado', object.ApprovedCompleted));
+                        if (object.ApprovedRealDate == undefined) {
+                            $('#ApprovedEstimatedDate').html(formatDate(object.ApprovedEstimatedDate));
+                        }
+                        $('#ApprovedRealDate').html(formatDate(object.ApprovedRealDate));
+                        $('#ApprovedCompleted').html(formatIconCheck(object.ApprovedCompleted));
+
+                        //InProduction
+                        $('#InProductionIcon').html(formatIcon('fa fa-industry', 'En Px', object.InProductionCompleted));
+                        if (object.InProductionRealDate == undefined) {
+                            $('#InProductionEstimatedDate').html(formatDate(object.InProductionEstimatedDate));
+                        }
+                        $('#InProductionRealDate').html(formatDate(object.InProductionRealDate));
+                        $('#InProductionCompleted').html(formatIconCheck(object.InProductionCompleted));
+                        if (object.InProductionEnabled == false)
+                            document.getElementById("InProductionRow").style.display = 'none';
+                        else
+                            document.getElementById("InProductionRow").style.display = 'table-row';
+
+                        //ETD
+                        $('#ETDIcon').html(formatIcon('fa fa-ship', 'Embarcado ETD', object.ETDCompleted));
+                        $('#ETDEstimatedDate').html(formatDate(object.ETDEstimatedDate));
+                        $('#ETDRealDate').html(formatDate(object.ETDRealDate));
+                        $('#ETDCompleted').html(formatIconCheck(object.ETDCompleted));
+                        if (object.ETDEnabled == false)
+                            document.getElementById("ETDRow").style.display = 'none';
+                        else
+                            document.getElementById("ETDRow").style.display = 'table-row';
+
+                        //ETA
+                        $('#ETAIcon').html(formatIcon('fa fa-pallet', 'Puerto ETA', object.ETACompleted));
+                        if (object.ETARealDate == undefined) {
+                            $('#ETAEstimatedDate').html(formatDate(object.ETAEstimatedDate));
+                        }
+                        $('#ETARealDate').html(formatDate(object.ETARealDate));
+                        $('#ETACompleted').html(formatIconCheck(object.ETACompleted));
+                        if (object.ETAEnabled == false)
+                            document.getElementById("ETARow").style.display = 'none';
+                        else
+                            document.getElementById("ETARow").style.display = 'table-row';
+
+                        //Nationalized
+                        $('#NationalizedIcon').html(formatIcon('fa fa-warehouse', 'Nacionalizado', object.NationalizedCompleted));
+                        if (object.NationalizedRealDate == undefined) {
+                            $('#NationalizedEstimatedDate').html(formatDate(object.NationalizedEstimatedDate));
+                        }
+                        $('#NationalizedRealDate').html(formatDate(object.NationalizedRealDate));
+                        $('#NationalizedCompleted').html(formatIconCheck(object.NationalizedCompleted));
+                        if (object.NationalizedEnabled == false)
+                            document.getElementById("NationalizedRow").style.display = 'none';
+                        else
+                            document.getElementById("NationalizedRow").style.display = 'table-row';
+
+                        //Delivered
+                        $('#DeliveredIcon').html(formatIcon('fa fa-dolly', 'Entregado', object.DeliveredCompleted));
+                        if (object.DeliveredRealDate == undefined) {
+                            $('#DeliveredEstimatedDate').html(formatDate(object.DeliveredEstimatedDate));
+                        }
+                        $('#DeliveredRealDate').html(formatDate(object.DeliveredRealDate));
+                        $('#DeliveredCompleted').html(formatIconCheck(object.DeliveredCompleted));
+
+                        $('#ShipmentTrackingUI').modal(options);
+                        $('#ShipmentTrackingUI').modal('show');
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+
+            //$("#closbtn").click(function () {
+            //    $('#ShipmentTrackingUI').modal('hide');
+            //});
+        });
+
+    </script>
+
+}
+
+
+
+
+
+Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { pq = ViewBag.Pq, customerID = ViewBag.CustomerID, page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter, currentFechaDesde = ViewBag.CurrentFechaDesde, currentFechaHasta = ViewBag.CurrentFechaHasta, currentProductQuoteStatusID = ViewBag.SelectedProductQuoteStatusID }))
+

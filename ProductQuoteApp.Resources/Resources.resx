@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ActBack" xml:space="preserve">
+    <value>Volver</value>
+  </data>
+  <data name="ActBackToList" xml:space="preserve">
+    <value>Volver al Listado</value>
+  </data>
+  <data name="ActCreate" xml:space="preserve">
+    <value>Crear</value>
+  </data>
+  <data name="ActDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="ActDetails" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="ActEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="ActSave" xml:space="preserve">
+    <value>Grabar</value>
+  </data>
+  <data name="ChooseYourLanguage" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="CreditRating" xml:space="preserve">
+    <value>Clasificación Crediticia</value>
+  </data>
+  <data name="CreditRatingID_Required" xml:space="preserve">
+    <value>Debe ingresar Clasificación Crediticia</value>
+  </data>
+  <data name="CurrencyType_Required" xml:space="preserve">
+    <value>Debe ingresar Tipo Moneda</value>
+  </data>
+  <data name="Description200_Long" xml:space="preserve">
+    <value>Descripción debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="Description_Description" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Description_Required" xml:space="preserve">
+    <value>Debe ingresar Descripción</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="EtyCreditRating" xml:space="preserve">
+    <value>Clasificación Crediticia</value>
+  </data>
+  <data name="EtyCurrencyType" xml:space="preserve">
+    <value>Tipo Moneda (ARS/USD)</value>
+  </data>
+  <data name="EtyCustomer" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="EtyCustomerOrderStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="EtyCustomers" xml:space="preserve">
+    <value>Clientes</value>
+  </data>
+  <data name="EtyGeographicArea" xml:space="preserve">
+    <value>Lugar de Entrega</value>
+  </data>
+  <data name="EtyGeographicAreas" xml:space="preserve">
+    <value>Lugares de Entrega</value>
+  </data>
+  <data name="EtyGlobalVariables" xml:space="preserve">
+    <value>Parámetros del Sistema</value>
+  </data>
+  <data name="EtyPackaging" xml:space="preserve">
+    <value>Envase</value>
+  </data>
+  <data name="EtyPackagings" xml:space="preserve">
+    <value>Envases</value>
+  </data>
+  <data name="EtyPaymentDeadline" xml:space="preserve">
+    <value>Condición de Pago</value>
+  </data>
+  <data name="EtyProduct" xml:space="preserve">
+    <value>Producto</value>
+  </data>
+  <data name="EtyProductDocuments" xml:space="preserve">
+    <value>Documentos</value>
+  </data>
+  <data name="EtyProductQuote" xml:space="preserve">
+    <value>Cotización Producto</value>
+  </data>
+  <data name="EtyProductQuotes" xml:space="preserve">
+    <value>Cotizaciones Productos</value>
+  </data>
+  <data name="EtyProducts" xml:space="preserve">
+    <value>Productos</value>
+  </data>
+  <data name="EtyProvider" xml:space="preserve">
+    <value>Proveedor</value>
+  </data>
+  <data name="EtyProviders" xml:space="preserve">
+    <value>Proveedores</value>
+  </data>
+  <data name="EtyTransportType" xml:space="preserve">
+    <value>Tipo de Transporte</value>
+  </data>
+  <data name="EtyTransportTypes" xml:space="preserve">
+    <value>Tipos de Transporte</value>
+  </data>
+  <data name="EtyUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="EtyUsers" xml:space="preserve">
+    <value>Usuarios</value>
+  </data>
+  <data name="FileNamePdfProductQuoteTemplate" xml:space="preserve">
+    <value>ProductQuoteTemplate_es.pdf</value>
+  </data>
+  <data name="GralNumberValue" xml:space="preserve">
+    <value>Debe ingresar un valor numérico</value>
+  </data>
+  <data name="GralPercentageValue" xml:space="preserve">
+    <value>Debe ingresar un valor entre 0,0 y 100,0</value>
+  </data>
+  <data name="MargenMin" xml:space="preserve">
+    <value>Margen Min</value>
+  </data>
+  <data name="MargenMin_Required" xml:space="preserve">
+    <value>Debe ingresar Margen Min</value>
+  </data>
+  <data name="Name200_Long" xml:space="preserve">
+    <value>Nombre debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="Name_Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Name_Required" xml:space="preserve">
+    <value>Debe ingresar Nombre</value>
+  </data>
+  <data name="PackagingKilogram" xml:space="preserve">
+    <value>Kg Envase</value>
+  </data>
+  <data name="PackagingKilogram_Required" xml:space="preserve">
+    <value>Debe ingresar Kg Envase</value>
+  </data>
+  <data name="PositionKilogram" xml:space="preserve">
+    <value>Unidad Mínima de Venta (Kg.)</value>
+  </data>
+  <data name="PositionKilogram_Required" xml:space="preserve">
+    <value>Debe ingresar Unidad Mínima de Venta (Kg.)</value>
+  </data>
+  <data name="PtyConfirmPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="PtyConfirmPasswordNoMatch" xml:space="preserve">
+    <value>La Contraseña y la Confirmación no coinciden</value>
+  </data>
+  <data name="PtyConfirmPassword_Required" xml:space="preserve">
+    <value>Debe ingresar la Confirmación de Contraseña</value>
+  </data>
+  <data name="PtyCostoAlmacenamientoMensual" xml:space="preserve">
+    <value>Costo Almacenamiento (ARS/Mes/Posición)</value>
+  </data>
+  <data name="PtyCostoAlmacenamientoMensual_Required" xml:space="preserve">
+    <value>Debe ingresar Costo Almac. (ARS/Mes/Posición)</value>
+  </data>
+  <data name="PtyCostoFinancieroMensual" xml:space="preserve">
+    <value>Costo Finananciero (TEM %)</value>
+  </data>
+  <data name="PtyCostoFinancieroMensual_Required" xml:space="preserve">
+    <value>Debe ingresar Costo Finananciero (TEM %)</value>
+  </data>
+  <data name="PtyCostoInOut" xml:space="preserve">
+    <value>Costo IN-OUT (ARS/Posición)</value>
+  </data>
+  <data name="PtyCostoInOut_Required" xml:space="preserve">
+    <value>Debe ingresar Costo IN-OUT (ARS/Posición)</value>
+  </data>
+  <data name="PtyCustomerOrderCode" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="PtyCustomerOrderDateOrder" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="PtyDateDelivery" xml:space="preserve">
+    <value>Fecha Entrega</value>
+  </data>
+  <data name="PtyDateQuote" xml:space="preserve">
+    <value>Fecha Cotización</value>
+  </data>
+  <data name="PtyDays" xml:space="preserve">
+    <value>Días</value>
+  </data>
+  <data name="PtyDays_Required" xml:space="preserve">
+    <value>Debe ingresar Días</value>
+  </data>
+  <data name="PtyDescription" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="PtyEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="PtyEmail_Required" xml:space="preserve">
+    <value>Debe ingresar Email</value>
+  </data>
+  <data name="PtyFactorCostoAlmacenamientoMensual" xml:space="preserve">
+    <value>Factor Tiempo en Stock</value>
+  </data>
+  <data name="PtyFactorCostoAlmacenamientoMensual_Required" xml:space="preserve">
+    <value>Debe ingresar Factor Tiempo en Stock</value>
+  </data>
+  <data name="PtyFCLKilogram" xml:space="preserve">
+    <value>Cantidad por Contenedor (Kg)</value>
+  </data>
+  <data name="PtyFCLKilogram_Required" xml:space="preserve">
+    <value>Debe ingresar Cantidad por Contenedor (Kg)</value>
+  </data>
+  <data name="PtyFirstName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="PtyFirstName_Required" xml:space="preserve">
+    <value>Debe ingresar Nombre</value>
+  </data>
+  <data name="PtyGastosFijos" xml:space="preserve">
+    <value>Gastos Fijos (%)</value>
+  </data>
+  <data name="PtyGastosFijos_Required" xml:space="preserve">
+    <value>Debe ingresar Gastos Fijos (%)</value>
+  </data>
+  <data name="PtyIIBBAlicuota" xml:space="preserve">
+    <value>IIBB Alicuota (%)</value>
+  </data>
+  <data name="PtyIIBBAlicuota_Required" xml:space="preserve">
+    <value>Debe ingresar IIBB (%) Alicuota</value>
+  </data>
+  <data name="PtyImpuestoDebitoCredito" xml:space="preserve">
+    <value>Impuesto Débito/Credito (%)</value>
+  </data>
+  <data name="PtyImpuestoDebitoCredito_Required" xml:space="preserve">
+    <value>Debe ingresar Impuesto Débito/Credito (%)</value>
+  </data>
+  <data name="PtyIntRange1_100" xml:space="preserve">
+    <value>Los valores deben ser entre 1 y 100</value>
+  </data>
+  <data name="PtyLastName" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="PtyLastName_Required" xml:space="preserve">
+    <value>Debe ingresar Apellido</value>
+  </data>
+  <data name="PtyMermaGranel" xml:space="preserve">
+    <value>Merma Granel (%)</value>
+  </data>
+  <data name="PtyMermaGranel_Required" xml:space="preserve">
+    <value>Debe ingresar Merma Granel (%)</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage" xml:space="preserve">
+    <value>Margen Mínimo Operación (%)</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage_Required" xml:space="preserve">
+    <value>Debe ingresar el Margen Mínimo Operación  (%)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD" xml:space="preserve">
+    <value>Margen Mínimo por Entrega (USD)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD_Required" xml:space="preserve">
+    <value>Debe ingresar el Margen Mínimo por Entrega (USD)</value>
+  </data>
+  <data name="PtyName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="PtyPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="PtyPassword_Required" xml:space="preserve">
+    <value>Debe ingresar la Contraseña</value>
+  </data>
+  <data name="PtyPassword_Rule" xml:space="preserve">
+    <value>La Contraseña debe tener al menos 6 caracteres de largo</value>
+  </data>
+  <data name="PtyPositionQuantityFrom" xml:space="preserve">
+    <value>Neto Min. (Kg)</value>
+  </data>
+  <data name="PtyPositionQuantityFrom_Required" xml:space="preserve">
+    <value>Debe ingresar Neto Min. (Kg)</value>
+  </data>
+  <data name="PtyPositionQuantityTo" xml:space="preserve">
+    <value>Neto Max (Kg)</value>
+  </data>
+  <data name="PtyPositionQuantityTo_Required" xml:space="preserve">
+    <value>Debe ingresar Neto Max (Kg)</value>
+  </data>
+  <data name="PtyPrice" xml:space="preserve">
+    <value>Precio (USD/Kg)</value>
+  </data>
+  <data name="PtyProductQuoteCode" xml:space="preserve">
+    <value>Cotización Producto</value>
+  </data>
+  <data name="PtyProviderName" xml:space="preserve">
+    <value>Nombre Proveedor</value>
+  </data>
+  <data name="PtyQuantity" xml:space="preserve">
+    <value>Cantidad Mínima por Entrega (Kg)</value>
+  </data>
+  <data name="PtyQuoteToRevision" xml:space="preserve">
+    <value>Cotización a Revisar</value>
+  </data>
+  <data name="PtyRememberMe" xml:space="preserve">
+    <value>Recordarme?</value>
+  </data>
+  <data name="PtyStackable" xml:space="preserve">
+    <value>Apilable</value>
+  </data>
+  <data name="PtyStackeable" xml:space="preserve">
+    <value>Apilable</value>
+  </data>
+  <data name="PtyTipoCambio" xml:space="preserve">
+    <value>Tipo Cambio (ARS/USD)</value>
+  </data>
+  <data name="PtyTipoCambio_Required" xml:space="preserve">
+    <value>Debe ingresar Tipo Cambio (ARS/USD)</value>
+  </data>
+  <data name="PtyValidityOfPrice" xml:space="preserve">
+    <value>Validez Precio</value>
+  </data>
+  <data name="PtyValidityOfPrice_Required" xml:space="preserve">
+    <value>Debe ingresar Validez del Precio</value>
+  </data>
+  <data name="Quantity_Required" xml:space="preserve">
+    <value>Debe ingresar Cantidad Mínima por Entrega (Kg)</value>
+  </data>
+  <data name="QuestionDelete" xml:space="preserve">
+    <value>Esta usted seguro de eliminar</value>
+  </data>
+  <data name="SellerCommission" xml:space="preserve">
+    <value>Comisión Vendedor (%)</value>
+  </data>
+  <data name="SellerCommission_Required" xml:space="preserve">
+    <value>Debe ingresar Comisión Vendedor (%)</value>
+  </data>
+  <data name="ValidityPeriodOfPrice" xml:space="preserve">
+    <value>Validez Precio</value>
+  </data>
+  <data name="ValidityPeriodOfPrice_Required" xml:space="preserve">
+    <value>Debe ingresar Validez Precio</value>
+  </data>
+  <data name="WarehouseCost" xml:space="preserve">
+    <value>Costo en Depósito (USD/Kg)</value>
+  </data>
+  <data name="WarehouseCost_Required" xml:space="preserve">
+    <value>Debe ingresar Costo en Depósito (USD/Kg)</value>
+  </data>
+  <data name="PtyProductDocumentPDF" xml:space="preserve">
+    <value>Documento</value>
+  </data>
+  <data name="PtyProductDocumentPDF_Required" xml:space="preserve">
+    <value>Debe cargar un Documento</value>
+  </data>
+  <data name="EtyPaymentDeadlines" xml:space="preserve">
+    <value>Condiciones de Pago</value>
+  </data>
+  <data name="PtyMaximumMonthsStock" xml:space="preserve">
+    <value>Máximo Tiempo en Stock (Meses)</value>
+  </data>
+  <data name="PtyQuantityOpenPurchaseOrder" xml:space="preserve">
+    <value>Cantidad Total  Orden de Compra (Kg)</value>
+  </data>
+  <data name="PtyQuantityOpenPurchaseOrder_Required" xml:space="preserve">
+    <value>Debe ingresar Cantidad Total  Orden de Compra (Kg)</value>
+  </data>
+  <data name="PtyMonths" xml:space="preserve">
+    <value>Meses</value>
+  </data>
+  <data name="EtySaleModality" xml:space="preserve">
+    <value>Modalidad de Venta</value>
+  </data>
+  <data name="PtyMinimumMarginGeneralPercentage" xml:space="preserve">
+    <value>Margen Mínimo General (%)</value>
+  </data>
+  <data name="PtyMinimumMarginGeneralPercentage_Required" xml:space="preserve">
+    <value>Debe ingresar el Margen Mínimo General (%)</value>
+  </data>
+  <data name="PtyMinimumMarginGeneralUSD" xml:space="preserve">
+    <value>Margen Mínimo General (USD)</value>
+  </data>
+  <data name="PtyMinimumMarginGeneralUSD_Required" xml:space="preserve">
+    <value>Debe ingresar el Margen Mínimo General (USD)</value>
+  </data>
+  <data name="EtyBrand" xml:space="preserve">
+    <value>Marca</value>
+  </data>
+  <data name="EtyBrand_Long" xml:space="preserve">
+    <value>Marca no debe tener mas de 200 caracteres</value>
+  </data>
+  <data name="ActChangePassword" xml:space="preserve">
+    <value>Modificar Contraseña</value>
+  </data>
+  <data name="PtyConfirmNewPassword" xml:space="preserve">
+    <value>Confirmación contraseña nueva</value>
+  </data>
+  <data name="PtyConfirmNewPasswordCompare" xml:space="preserve">
+    <value>La nueva contraseña y la confirmación no coinciden</value>
+  </data>
+  <data name="PtyConfirmNewPassword_Required" xml:space="preserve">
+    <value>Debe ingresar Confirmación contraseña nueva</value>
+  </data>
+  <data name="PtyCurrentPassword" xml:space="preserve">
+    <value>Contraseña actual</value>
+  </data>
+  <data name="PtyCurrentPassword_Required" xml:space="preserve">
+    <value>Debe ingresar Contraseña actual</value>
+  </data>
+  <data name="PtyNewPassword" xml:space="preserve">
+    <value>Contraseña nueva</value>
+  </data>
+  <data name="PtyNewPassword_Required" xml:space="preserve">
+    <value>Debe ingresar Contraseña nueva</value>
+  </data>
+  <data name="PtyPasswordRules" xml:space="preserve">
+    <value>La contraseña debe tener al menos 6 caracteres</value>
+  </data>
+  <data name="PtyCompany" xml:space="preserve">
+    <value>Empresa</value>
+  </data>
+  <data name="PtyJobPosition" xml:space="preserve">
+    <value>Cargo</value>
+  </data>
+  <data name="PtyObservation" xml:space="preserve">
+    <value>Observaciones</value>
+  </data>
+  <data name="EtyRofexs" xml:space="preserve">
+    <value>Cotización Dólar Futuro</value>
+  </data>
+  <data name="PtyDollarQuotation" xml:space="preserve">
+    <value>Cotización Dolar</value>
+  </data>
+  <data name="PtyCustomerName" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="PtyCustomerName_Long" xml:space="preserve">
+    <value>Contacto debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="PtyCustomerName_Required" xml:space="preserve">
+    <value>Debe ingresar Contacto</value>
+  </data>
+  <data name="PtyObservations" xml:space="preserve">
+    <value>Observaciones</value>
+  </data>
+  <data name="PtyProductCost_DL" xml:space="preserve">
+    <value>Costo (Distribución Local)</value>
+  </data>
+  <data name="PtyProductCost_DLP" xml:space="preserve">
+    <value>Costo (Distribución con Importación a Pedido)</value>
+  </data>
+  <data name="PtyProductCost_IND" xml:space="preserve">
+    <value>Costo (Indent)</value>
+  </data>
+  <data name="PtyProductCost_ISL" xml:space="preserve">
+    <value>Costo (Indent + Servicio Logístico/Financiero)</value>
+  </data>
+  <data name="PtyWaste" xml:space="preserve">
+    <value>Merma Producto (%)</value>
+  </data>
+  <data name="PtyWaste_Required" xml:space="preserve">
+    <value>Debe ingresar Merma (%)</value>
+  </data>
+  <data name="EtyFreightType" xml:space="preserve">
+    <value>Tipo de Carga</value>
+  </data>
+  <data name="EtyFreightTypes" xml:space="preserve">
+    <value>Tipos de Carga</value>
+  </data>
+  <data name="PtyDeliveryAmount" xml:space="preserve">
+    <value>Cantidad de Entregas</value>
+  </data>
+  <data name="PtyDeliveryAmount_Required" xml:space="preserve">
+    <value>Debe ingresar Cantidad de Entregas</value>
+  </data>
+  <data name="PtyClientObservations" xml:space="preserve">
+    <value>Observaciones Cliente</value>
+  </data>
+  <data name="PtyLeadTime" xml:space="preserve">
+    <value>Lead Time (Días desde FACT)</value>
+  </data>
+  <data name="PtyProviderPaymentDeadline" xml:space="preserve">
+    <value>Plazo Pago Proveedores (Días)</value>
+  </data>
+  <data name="PtyCustomerAdmin" xml:space="preserve">
+    <value>Es Administrador?</value>
+  </data>
+  <data name="PtyPriceOriginal" xml:space="preserve">
+    <value>Precio Original</value>
+  </data>
+  <data name="PtyDiasStockPromedioDistLocal" xml:space="preserve">
+    <value>Dias Stock Promedio Dist. Local</value>
+  </data>
+  <data name="PtyTiempoMedioStockMeses" xml:space="preserve">
+    <value>Tiempo Medio Stock Meses</value>
+  </data>
+  <data name="PtyFreightType" xml:space="preserve">
+    <value>Tipo de Carga</value>
+  </data>
+  <data name="PtyExchangeType" xml:space="preserve">
+    <value>Moneda de la Operación</value>
+  </data>
+  <data name="PtyPrice_PorEntrega" xml:space="preserve">
+    <value>Importe Total por Entrega (USD)</value>
+  </data>
+  <data name="PtyPrice_PorOC" xml:space="preserve">
+    <value>Importe Total Orden de Compra (USD)</value>
+  </data>
+  <data name="PtyBuyAndSellDirect" xml:space="preserve">
+    <value>Es Compra-Venta Directa</value>
+  </data>
+  <data name="PtyCompleted" xml:space="preserve">
+    <value>Completado</value>
+  </data>
+  <data name="PtyEstimatedDate" xml:space="preserve">
+    <value>Fecha Estimada</value>
+  </data>
+  <data name="PtyRealDate" xml:space="preserve">
+    <value>Fecha Real</value>
+  </data>
+  <data name="PtyStateName" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="PtyOCStatus" xml:space="preserve">
+    <value>Estado OC</value>
+  </data>
+  <data name="EtyBrand_Required" xml:space="preserve">
+    <value>Debe ingresar Marca</value>
+  </data>
+  <data name="PtyProviderPaymentDeadline_Required" xml:space="preserve">
+    <value>Debe ingresar Plazo Pago Proveedores (Días)</value>
+  </data>
+  <data name="PtyIsSpot" xml:space="preserve">
+    <value>Cliente Spot</value>
+  </data>
+  <data name="PtyEditGlobalVariables" xml:space="preserve">
+    <value>Edita Parametros?</value>
+  </data>
+  <data name="PtyEditMarginOrPrice" xml:space="preserve">
+    <value>Edita Margen y/o Precio?</value>
+  </data>
+  <data name="PtyIsCustomerAdmin" xml:space="preserve">
+    <value>Es Administrador?</value>
+  </data>
+  <data name="PtySeeCosting" xml:space="preserve">
+    <value>Ve Costeo?</value>
+  </data>
+  <data name="PtyUserName" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="EtySellerCompany" xml:space="preserve">
+    <value>Empresa Vendedora</value>
+  </data>
+  <data name="PtyPQPDFTemplate" xml:space="preserve">
+    <value>Template PDF Cotizacion</value>
+  </data>
+  <data name="PtyPQPDFTemplate200_Long" xml:space="preserve">
+    <value>Template PDF Cotizacion debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="PtyPQPDFTemplate_Required" xml:space="preserve">
+    <value>Debe ingresar Template PDF Cotizacion</value>
+  </data>
+  <data name="PtyCompany200_Long" xml:space="preserve">
+    <value>Empresa debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="PtyCompany_Required" xml:space="preserve">
+    <value>Debe Ingresar Empresa</value>
+  </data>
+  <data name="PtyAddToAllCustomer" xml:space="preserve">
+    <value>Agregar a todos los Clientes</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage_DL" xml:space="preserve">
+    <value>Margen Mínimo (Distribución Local) (%)</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage_DLP" xml:space="preserve">
+    <value>Margen Mínimo (Distribución con Importación a Pedido) (%)</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage_IND" xml:space="preserve">
+    <value>Margen Mínimo (Indent) (%)</value>
+  </data>
+  <data name="PtyMinimumMarginPercentage_ISL" xml:space="preserve">
+    <value>Margen Mínimo (Indent + Servicio Logístico/Financiero) (%)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD_DL" xml:space="preserve">
+    <value>Margen Mínimo (Distribución Local) (USD)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD_DLP" xml:space="preserve">
+    <value>Margen Mínimo (Distribución con Importación a Pedido) (USD)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD_IND" xml:space="preserve">
+    <value>Margen Mínimo (Indent) (USD)</value>
+  </data>
+  <data name="PtyMinimumMarginUSD_ISL" xml:space="preserve">
+    <value>Margen Mínimo (Indent + Servicio Logístico/Financiero) (USD)</value>
+  </data>
+  <data name="PtyApplyPriceFactor" xml:space="preserve">
+    <value>Aplicar Precio Proporcional o Margen Equivalente</value>
+  </data>
+  <data name="PtyExceptionPrice" xml:space="preserve">
+    <value>Precio de Excepcion</value>
+  </data>
+  <data name="PtyIsDeliveryAmountSearchParam" xml:space="preserve">
+    <value>Cantidad de Entregas de Busqueda?</value>
+  </data>
+  <data name="PtyIsExchangeTypeSearchParam" xml:space="preserve">
+    <value>Moneda de la Operacion de Busqueda?</value>
+  </data>
+  <data name="PtyIsGeographicAreaSearchParam" xml:space="preserve">
+    <value>Lugar de Entrega de Busqueda?</value>
+  </data>
+  <data name="PtyIsMaximumMonthsStockSearchParam" xml:space="preserve">
+    <value>Máximo Tiempo en Stock (Meses) de Busqueda?</value>
+  </data>
+  <data name="PtyIsPaymentDeadlineSearchParam" xml:space="preserve">
+    <value>Condición de Pago de Busqueda?</value>
+  </data>
+  <data name="PtyIsQuantityOpenPurchaseOrderSearchParam" xml:space="preserve">
+    <value>Cantidad Total  Orden de Compra (Kg) de Busqueda?</value>
+  </data>
+  <data name="PtyExchangeInsurance" xml:space="preserve">
+    <value>Costo Seguro Cambiario (% sobre Precio)</value>
+  </data>
+  <data name="PtyIsSaleModalitySearchParam" xml:space="preserve">
+    <value>Modalidad de Venta de Busqueda?</value>
+  </data>
+  <data name="PtyProductBuyAndSellDirect" xml:space="preserve">
+    <value>Es Compra/Venta Directa?</value>
+  </data>
+  <data name="PtyIsMinimumQuantityDeliverySearchParam" xml:space="preserve">
+    <value>Cantidad Minima por Entrega de Busqueda?</value>
+  </data>
+  <data name="PtyIntRange1_1000000" xml:space="preserve">
+    <value>Los valores deben ser entre 1 y 1.000.000</value>
+  </data>
+  <data name="PtyIsProspect" xml:space="preserve">
+    <value>Es Prostecto</value>
+  </data>
+  <data name="Details2048_Long" xml:space="preserve">
+    <value>Detalle debe ser menor a 2048 caracteres</value>
+  </data>
+  <data name="EtyContactType" xml:space="preserve">
+    <value>Tipo Contacto</value>
+  </data>
+  <data name="EtyContacts" xml:space="preserve">
+    <value>Contactos</value>
+  </data>
+  <data name="EtyContact" xml:space="preserve">
+    <value>Contacto</value>
+  </data>
+  <data name="PtyDateContact_Required" xml:space="preserve">
+    <value>Debe ingresar Fecha Contacto</value>
+  </data>
+  <data name="PtyGralLong_200" xml:space="preserve">
+    <value>El largo del campo no debe superar los 200 caracteres</value>
+  </data>
+  <data name="PtyGralLong_50" xml:space="preserve">
+    <value>El largo del campo no debe superar los 50 caracteres</value>
+  </data>
+  <data name="PtyInitials" xml:space="preserve">
+    <value>Iniciales</value>
+  </data>
+  <data name="PtyInitials_Required" xml:space="preserve">
+    <value>Debe ingresar las Iniciales</value>
+  </data>
+  <data name="PtyInitials_Rule" xml:space="preserve">
+    <value>Debe ingresar 3 caracteres</value>
+  </data>
+  <data name="PtyPercentage" xml:space="preserve">
+    <value>Porcentaje</value>
+  </data>
+  <data name="EtyContactClass" xml:space="preserve">
+    <value>Clase Contacto</value>
+  </data>
+  <data name="EtyIIBBTreatment" xml:space="preserve">
+    <value>Tratamiento IIBB</value>
+  </data>
+  <data name="PtyInOutStorage" xml:space="preserve">
+    <value>Almacenamiento In/Out</value>
+  </data>
+  <data name="EtyReasonsForClosure" xml:space="preserve">
+    <value>Motivos de Cierre</value>
+  </data>
+  <data name="PtyPQSmallPDFTemplate" xml:space="preserve">
+    <value>Template PDF Reducido Cotizacion</value>
+  </data>
+  <data name="PtyPQSmallPDFTemplate200_Long" xml:space="preserve">
+    <value>Template PDF Reducido Cotizacion debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="PtyPQSmallPDFTemplate_Required" xml:space="preserve">
+    <value>Debe ingresar Template PDF Reducido Cotizacion</value>
+  </data>
+  <data name="PtyAvailabilityDays" xml:space="preserve">
+    <value>Disponibilidad (Dias)</value>
+  </data>
+  <data name="PtyDatesDeliveryInput" xml:space="preserve">
+    <value>Fechas de Entrega</value>
+  </data>
+  <data name="EtySalesChannel" xml:space="preserve">
+    <value>Negocio</value>
+  </data>
+  <data name="Code_Description" xml:space="preserve">
+    <value>Código</value>
+  </data>
+  <data name="Code_Required" xml:space="preserve">
+    <value>Debe ingresar el Código</value>
+  </data>
+  <data name="Obs500_Long" xml:space="preserve">
+    <value>Observaciones debe ser menor a 200 caracteres</value>
+  </data>
+  <data name="PtyActive" xml:space="preserve">
+    <value>Activo</value>
+  </data>
+  <data name="ActCreateAndQuit" xml:space="preserve">
+    <value>Crear y Salir</value>
+  </data>
+  <data name="PtyClosureDate" xml:space="preserve">
+    <value>Fecha Cierre</value>
+  </data>
+  <data name="PtyClosureObservations" xml:space="preserve">
+    <value>Observaciones Cierre</value>
+  </data>
+  <data name="PtyClosureDate_Required" xml:space="preserve">
+    <value>Debe ingresar Fecha Cierre</value>
+  </data>
+  <data name="PtyDateSent" xml:space="preserve">
+    <value>Fecha Enviada</value>
+  </data>
+</root>

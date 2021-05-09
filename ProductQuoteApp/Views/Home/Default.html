@@ -1,0 +1,120 @@
+﻿@{
+    ViewBag.Title = "QuimKong | Home";
+}
+
+@*<div class="jumbotron">
+    <h1>Cotizador</h1>
+    <p class="lead">Cotizador online de Productos Quimicos.</p>
+    <p><a href="~/Home" class="btn btn-primary btn-lg">Mas Informacion &raquo;</a></p>
+</div>*@
+
+		<section class="container">
+			<div class="row">
+				<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 text-center mt-2">
+					<h2>Pasos para Operar en QuimKong</h2>
+				</div><!-- col -->
+				<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 text-center mt-3">
+					<h3>Haciendo Click en los siguientes Menues</h3>
+				</div><!-- col -->
+			</div><!-- row -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 mt-3">
+					<a class="menues" href="~/ProductQuote/Create" role="button"><i class="fas fa-calculator fa-3x"></i>Cotizar</a>
+				</div><!-- col -->
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-2 mt-3">
+					<a class="menues" href="~/ProductQuote?pq=1" role="button"><i class="fas fa-list-ul fa-3x"></i>Cotizaciones</a>
+				</div><!-- col -->
+				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-5 mt-3">
+					<a class="menues" href="~/ProductQuote?pq=0" role="button"><i class="far fa-handshake fa-3x"></i>Ordenes de compra</a>
+				</div><!-- col -->
+			</div><!-- row -->
+			
+			<div class="row">
+				<div class="col-xs-12 col-xs-offset-0 col-sm-12 col-sm-offset-0 col-md-8 col-md-offset-2 col-lg-8 col-lg-offset-2 text-center mt-3">
+					<h3>Usted Podrá:</h3>
+				</div><!-- col -->
+			</div><!-- row -->
+			
+			<div class="row tooltips">
+				<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 mt-2">
+					<a class="tooltip-info" href="#" role="button" data-placement="top"
+					   title="
+							<h4>Haciendo click en el ícono COTIZAR podrá:</h4><br>
+							<ul>
+								<li>- Seleccionar el producto que desea cotizar: podrá también solicitar la inclusión de un producto que no haya visto en el buscador</li>
+								<li>- Elegir la modalidad de venta</li>
+								<li>- Definir donde desea que le entreguen el producto</li>
+								<li>- Seleccionar un plazo de pago disponible</li>
+								<li>- Ingresar el volumen de orden de compra</li>
+								<li>- Definir en cuantas entregas recibira su compra</li>
+								<li>- Solicitar que su mercaderia se reserve en nuestro stock por x tiempo</li>
+								<li>- Definir la moneda de la operacion</li>
+								<br>
+							</ul>
+							<h4>Para obtener su Precio Online presionar:</h4><br><img src='../assets/image/precioonline.jpg' width='262' height='54' alt='Boton Calcular Precio'><br><br>
+							<p>IMPORTANTE: Todas estas condiciones tienen incidencia en el precio cotizado. Pero en esta instancia solo está en un entorno de prueba, con lo cual puede evaluar muchas alternativas sin ningún costo o compromiso real.</p><br>
+							<p>Si tiene alguna duda de qué implica elegir una opción o la otra, revise los iconos de ayuda al lado de cada selección <i class='fas fa-info-circle fa-lg'></i></p>
+							"
+							rel="tooltip"><i class="fas fa-calculator fa-3x"></i>Simular</a>
+				</div><!-- col -->
+				<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 mt-2">
+					<a class="tooltip-info" href="#" role="button" data-placement="top"
+					   title="
+							<h4>Si está conforme con el precio obtenido debe presionar:</h4><br><img src='../assets/image/crearcotizacion.jpg' width='262' height='54' alt='Boton Crear Cotización'><br><br><h4>Al hacerlo obtendrá:</h4><br>
+							<ul>
+								<li>- Una cotización formal con todas las condiciones seleccionadas</li>
+								<li>- Una validez de oferta que fijará el precio para usted por un lapso de tiempo</li>
+								<li>- Los documentos de calidad y seguridad del producto</li>
+								<li>- Una descripción de las modalidades de venta para que pueda chequear las condiciones de aquello que seleccionó</li><br>
+							</ul>
+							<p>IMPORTANTE: La Cotización es un documento que le permite 'congelar' su precio durante su validez y es el paso previo a la generación de una Orden de compra Online</p>
+							"
+							rel="tooltip"><i class="fas fa-list-ul fa-3x"></i>Crear Cotización</a>
+				</div><!-- col -->
+				<div class="col-xs-6 col-sm-4 col-md-2 col-lg-2 mt-2">
+					<a class="tooltip-info" href="#" role="button" data-placement="top"
+					   title="
+							<h4>Si ya creó una Cotización, podrá revisar esa y otras Cotizaciones anteriores en el Menú ‘Mis Cotizaciones’</h4><br>
+							<ul>
+								<li>- Allí seleccionará las cotizaciones que haya hecho y que estén vigentes, y podrá decidirse a hacer una compra presionando:</li>
+								<li><img src='../assets/image/crearoc.jpg' width='91' height='42' alt='Boton Crear Orden'><br></li>
+								<li>- Al hacerlo, QuimKong le notificará de su voluntad de compra para su posterior aprobación</li><br>
+							</ul>
+							<p>IMPORTANTE: La Orden de Compra solo se considera válida toda vez que se visualiza aprobada por QuimKong.</p>
+							"
+							rel="tooltip"><i class="far fa-handshake fa-3x"></i>Crear Ordenes</a>
+				</div><!-- col -->
+				<div class="col-xs-6 col-sm-4 col-sm-offset-2 col-md-2 col-md-offset-0 col-lg-2 col-lg-offset-0  mt-2">
+					<a class="tooltip-info" href="#" role="button" data-placement="top"
+					   title="
+							<h4>En el Menú 'Ordenes de Compra' podrá ver si su Orden de Compra ya fue Aprobada</h4><br>
+							<ul>
+								<li>- A poco tiempo de creada la orden de compra, QuimKong dara su autorización para proseguir con la misma. Esto podrá chequearlo revisando el “Estado” de la Orden de Compra, el cual podrá ser “Creada” (para aquellas Ordenes pendientes de aprobación), “Aprobada” o “Rechazada”.</li><br>
+							</ul>
+							<p>IMPORTANTE: Cuando la Orden de Compra ya se encuentra Aprobada, recién allí se configura un contrato con obligaciones y derechos entre las partes. La aprobación es un hecho necesario para evitar contingencias como por ejemplo la falta de stock repentina.</p>
+							"
+							rel="tooltip"><i class="fas fa-check fa-3x"></i>Aprobación C/O</a>
+				</div><!-- col -->
+				<div class="col-xs-12 col-sm-4 col-md-3 col-lg-3 mt-2 mb-2">
+					<a class="tooltip-info" href="#" role="button" data-placement="top"
+					   title="
+							<h4>Adicionalmente al estado de aprobación, podrá dar Seguimiento a su Orden de Compra para tener noción de cuando podrá recibir su pedido</h4><br>
+							<ul>
+								<li>- Esto es especialmente importante para las opciones de importacion a pedido o indent, donde tenemos que esperar varios dias hasta recibir nuestra orden</li>
+								<li>- Haciendo click en el mismo icono de seguimiento podemos ver el status de nuestro pedido con fechas estimadas a futuro o reales ya acontecidas:</li>
+								<li><img src='../assets/image/seguimiento.jpg' width='65' height='55' alt='boton seguimiento'><br></li>
+							</ul>
+							<p>IMPORTANTE: El seguimiento de Entregas también puede utilizarse para la distribución Local, pero con menos pasos que en las opciones que requieren importación a pedido del cliente.</p>
+							"
+							rel="tooltip"><i class="fas fa-shipping-fast fa-3x"></i>Consultar Entregas</a>
+				</div><!-- col -->
+			</div><!-- row -->
+		</section><!-- container -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+			$("[rel=tooltip]").tooltip({html:true});
+			})
+</script>

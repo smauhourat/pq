@@ -1,0 +1,153 @@
+﻿@model ProductQuoteApp.Persistence.WayOfException
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActDelete;
+}
+
+<!--<h2>Delete</h2>-->
+
+<h3>@ProductQuoteApp.Resources.Resources.QuestionDelete Via de Excepcion</h3>
+<div>
+    <hr />
+    <div class="form-horizontal">
+        <div class="row">
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Customer):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Customer.Company)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Product):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Product.FullName)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SaleModality):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.SaleModality.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.GeographicArea):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.GeographicArea.Name)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsGeographicAreaSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsGeographicAreaSearchParam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.PaymentDeadline):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.PaymentDeadline.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsPaymentDeadlineSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsPaymentDeadlineSearchParam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.QuantityOpenPurchaseOrder):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.QuantityOpenPurchaseOrder)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsQuantityOpenPurchaseOrderSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsQuantityOpenPurchaseOrderSearchParam)
+                    </dd>
+
+                </dl>
+            </div>
+            <div class="col-md-6">
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.DeliveryAmount):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DeliveryAmount)
+                    </dd>
+                    
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsDeliveryAmountSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsDeliveryAmountSearchParam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MaximumMonthsStock):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.MaximumMonthsStock)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsMaximumMonthsStockSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsMaximumMonthsStockSearchParam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ExchangeType):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ExchangeType.Description)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.IsExchangeTypeSearchParam):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.IsExchangeTypeSearchParam)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ExceptionPrice):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ExceptionPrice)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.ExceptionApplyType):
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ExceptionApplyType)
+                    </dd>
+
+                </dl>
+            </div>
+        </div>
+    </div>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value=@ProductQuoteApp.Resources.Resources.ActDelete class="btn btn-default" /> |
+            @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+        </div>
+    }
+</div>

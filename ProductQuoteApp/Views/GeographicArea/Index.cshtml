@@ -1,0 +1,35 @@
+﻿@model IEnumerable<ProductQuoteApp.Persistence.GeographicArea>
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.EtyGeographicAreas;
+}
+
+<div class="row" style="margin-bottom:25px;">
+    <h3>@ProductQuoteApp.Resources.Resources.EtyGeographicAreas</h3>
+</div>
+
+<p>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+</p>
+<table class="table">
+    <tr>
+        <th width="100%">
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td nowrap>
+            <a title="@ProductQuoteApp.Resources.Resources.ActEdit" href="@Url.Action("Edit", "GeographicArea", new { id = item.GeographicAreaID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "GeographicArea", new { id = item.GeographicAreaID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+            <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "GeographicArea", new { id = item.GeographicAreaID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+        </td>
+    </tr>
+}
+
+</table>

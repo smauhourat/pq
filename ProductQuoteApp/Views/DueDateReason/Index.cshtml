@@ -1,0 +1,54 @@
+﻿@model PagedList.IPagedList<ProductQuoteApp.Persistence.DueDateReason>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Razones Vencimientos";
+}
+
+<div class="row" style="margin-bottom:15px;">
+    <h3>Razones Vencimientos</h3>
+</div>
+
+    <p>
+        @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActCreate, "Create")
+    </p>
+    @using (Html.BeginForm("Index", "DueDateReason", FormMethod.Get))
+    {
+        <div class="control-group">
+            <div class="controls form-inline">
+                @Html.TextBox("SearchString", ViewBag.filter as string, new { @placeholder = "Buscar", @class = "form-control" })
+                <input type="submit" value="Buscar" class="btn btn-default" />
+            </div>
+        </div>
+    }
+    <p></p>
+    <table class="table">
+        <tr>
+            <th width="100%">
+                @Html.ActionLink("Descripcion", "Index", new { sortOrder = ViewBag.ProviderNameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td nowrap>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActEdit" href="@Url.Action("Edit", "DueDateReason", new { id = item.DueDateReasonID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-edit'></i></div></a>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActDetails" href="@Url.Action("Details", "DueDateReason", new { id = item.DueDateReasonID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-book-open'></i></div></a>
+                    <a title="@ProductQuoteApp.Resources.Resources.ActDelete" href="@Url.Action("Delete", "DueDateReason", new { id = item.DueDateReasonID })"><div style="font-size:1.2em; display: inline-block;"><i class='fa fa-trash-alt'></i></div></a>
+                </td>
+            </tr>
+        }
+
+    </table>
+    <br />
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) de @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

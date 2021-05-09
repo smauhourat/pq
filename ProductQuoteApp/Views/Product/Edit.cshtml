@@ -1,0 +1,429 @@
+﻿@model ProductQuoteApp.Models.ProductViewModel
+
+@{
+    ViewBag.Title = @ProductQuoteApp.Resources.Resources.ActEdit;
+}
+
+<style type="text/css">
+    .col-header1 {
+        background-color: #eaebed;
+        height: 45px;
+        text-align: center;
+        font-size: medium;
+    }
+
+    .col-header2 {
+        background-color: #f5f3f3;
+    }
+
+    .rowGrid {
+        height: 40px;
+    }
+</style>
+
+<!--<h2>Edit</h2>-->
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h3>@ProductQuoteApp.Resources.Resources.EtyProduct</h3>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ProductID)
+
+        <div class="row">
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", @maxlength = "200" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProviderID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("ProviderID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ProviderID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Brand, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Brand, new { htmlAttributes = new { @class = "form-control", @maxlength = "200" } })
+                        @Html.ValidationMessageFor(model => model.Brand, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SellerCompanyID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("SellerCompanyID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SellerCompanyID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PackagingID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("PackagingID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.PackagingID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.PositionKilogram, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.PositionKilogram, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PositionKilogram, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FCLKilogram, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.FCLKilogram, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FCLKilogram, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ValidityOfPrice, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ValidityOfPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ValidityOfPrice, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Active, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Active)
+                        @Html.ValidationMessageFor(model => model.Active, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Waste, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Waste, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Waste, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FreightTypeID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("FreightTypeID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.FreightTypeID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProviderPaymentDeadline, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProviderPaymentDeadline, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.ProviderPaymentDeadline, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.IIBBTreatmentID, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownList("IIBBTreatmentID", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.IIBBTreatmentID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LeadTime, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.LeadTime, new { htmlAttributes = new { @class = "form-control", @type = "text" } })
+                        @Html.ValidationMessageFor(model => model.LeadTime, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BuyAndSellDirect, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.BuyAndSellDirect)
+                        @Html.ValidationMessageFor(model => model.BuyAndSellDirect, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.InOutStorage, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.InOutStorage)
+                        @Html.ValidationMessageFor(model => model.InOutStorage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductCost_DL, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProductCost_DL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductCost_DL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductCost_DLP, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProductCost_DLP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductCost_DLP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductCost_ISL, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProductCost_ISL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductCost_ISL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ProductCost_IND, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ProductCost_IND, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ProductCost_IND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Observations, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.Observations, new { @class = "form-control  col-md-9 col-xs-12", @rows = "4" })
+                        @Html.ValidationMessageFor(model => model.Observations, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ClientObservations, htmlAttributes: new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.TextAreaFor(model => model.ClientObservations, new { @class = "form-control  col-md-9 col-xs-12", @rows = "3" })
+                        @Html.ValidationMessageFor(model => model.ClientObservations, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+        <div class="row">
+            <div id="col-md-12 detailcontainer">
+                <h4>Margenes por Modalidad</h4>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td style="width: 270px">
+                                <strong>Modalidad</strong>
+                            </td>
+                            <td style="width:20%">
+                                <strong>Margen Minimo (%)</strong>
+                            </td>
+                            <td style="width:20%">
+                                <strong>Margen Minimo (USD)</strong>
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label class="control-label">Distribución Local</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_DL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DL, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_DL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DL, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Distribución con Importación a Pedido</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_DLP, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DLP, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_DLP, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DLP, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Indent con Servicio Logístico y Financiero de Guarda</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_ISL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_ISL, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_ISL, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_ISL, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label class="control-label">Indent</label>
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginPercentage_IND, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_IND, "", new { @class = "text-danger" })
+                            </td>
+                            <td>
+                                @Html.EditorFor(model => model.MinimumMarginUSD_IND, new { htmlAttributes = new { @class = "form-control", @style = "width: 130px" } })
+                                @Html.ValidationMessageFor(model => model.MinimumMarginUSD_IND, "", new { @class = "text-danger" })
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        @*<div class="row col-header1">
+            <div class="col-md-12">
+                <label class="control-label">Margenes por Modalidad</label>
+            </div>
+        </div>
+        <div class="row col-header2 rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Modalidad</label>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">Margen Minimo (%)</label>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">Margen Minimo (USD)</label>
+            </div>
+        </div>*@
+        @*<div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Distribución Local</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_DL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_DL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        @*<div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Distribución con Importación a Pedido</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_DLP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_DLP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_DLP, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_DLP, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        @*<div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Indent con Servicio Logístico y Financiero de Guarda</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_ISL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_ISL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_ISL, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_ISL, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+        @*<div class="row rowGrid">
+            <div class="col-md-6">
+                <label class="control-label">Indent</label>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginPercentage_IND, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginPercentage_IND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.MinimumMarginUSD_IND, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MinimumMarginUSD_IND, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+        <div class="row">
+            &nbsp;
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        @*<input type="submit" value=@ProductQuoteApp.Resources.Resources.ActSave class="btn btn-default" />*@
+                        <input type="submit" name="SaveAction" value="Grabar" class="btn btn-default" />
+                        <input type="submit" name="SaveAndQuitAction" value="Grabar y Salir" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink(@ProductQuoteApp.Resources.Resources.ActBackToList, "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

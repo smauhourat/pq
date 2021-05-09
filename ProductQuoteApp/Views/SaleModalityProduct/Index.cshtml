@@ -1,0 +1,98 @@
+﻿@{
+    ViewBag.Title = "Costos Productos por Modalidad de Venta";
+}
+
+
+<style>
+.selected { background-color: lightgray; }
+
+
+</style>
+
+<script src="~/Scripts/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+<script src="~/Scripts/knockout-3.4.2.js"></script>
+<script src="~/Scripts/knockout.validation.min.js"></script>
+<!--<h1>Costos Transporte</h1>-->
+
+<h3>Costos Productos por Modalidad de Venta</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <td>
+                <strong>Modalidad de Venta</strong>
+            </td>
+        </tr>
+    </thead>
+    <tbody data-bind="foreach:SaleModalitys">
+        <tr class="c1" data-bind="click:$root.openDetailsDialog, css: { selected: $root.isSelected($data)}">
+            <td> <span data-bind="text:Description"></span></td>
+        </tr>
+    </tbody>
+</table>
+
+<div id="detailcontainer">
+    <h4>Clasificaciones Crediticias : <span data-bind="text:Description"></span></h4>
+    <div id="dvtablecontainer"> <!--data-bind="visible: Products().length>0">-->
+        <div data-bind="validationElement: productList"></div>
+        <div data-bind="validationElement: productCostAdd"></div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <td style="width: 60%">
+                        <strong>Producto</strong> 
+                    </td>
+                    <td style="width: 20%">
+                        <strong>Costo</strong> 
+                    </td>
+                    <td style="width: 20%"></td>
+                </tr>
+            </thead>
+            <tbody data-bind="template: { name: template, foreach: Products }"></tbody>
+        </table>
+    </div>
+
+    <table class="table">
+        <tr data-bind="visible: showAddProduct">
+            <td style="width: 60%"><select data-bind="options: productList, optionsText: 'FullName', optionsValue: 'ProductID', value: selectedProductID, optionsCaption: 'Seleccione una Clasificacion ...'" size="1" style="width: 370px" class="form-control"></select></td>
+            <td style="width: 20%"><input type="text" id="txtproductCostAdd" data-bind="value: productCostAdd" class="form-control" style="width: 170px" /></td>
+            <td style="width: 20%"></td>
+        </tr>
+        <tr>
+            <td style="width: 60%"></td>
+            <td style="width: 20%"></td>
+            <td style="width: 20%">
+                <!--BOTONES-->
+                <button data-bind="click: $root.addProduct, visible: !showAddProduct() && !showEditProduct() && masterGridSelected()" class="btn btn-default">Agregar</button>
+                <button data-bind="click: $root.saveAddProduct, visible: showAddProduct" class="btn btn-default">Grabar</button>
+                <button data-bind="click: $root.cancelAddProduct,  visible: showAddProduct" class="btn btn-default">Cancelar</button>
+
+                <button data-bind="click: $root.editProduct, visible: !showEditProduct() && !showAddProduct() && masterGridSelected() && Products().length>0" class="btn btn-default">Editar</button>
+                <button data-bind="click: $root.saveEditProduct, visible: showEditProduct" class="btn btn-default">Grabar</button>
+                <button data-bind="click: $root.cancelEditProduct, visible: showEditProduct" class="btn btn-default">Cancelar</button>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<script type="text/html" id="TemplateA">
+    @*  <table>*@
+    <tr>
+        <td style="width: 60%"> <span data-bind="text:ProductFullName"></span></td>
+        <td style="width: 20%"> <span data-bind="text:ProductCost"></span></td>
+        <td style="width: 20%"> <button data-bind="click: function() { $root.deleteProduct($data); }" class="btn btn-default">Eliminar</button></td>
+    </tr>
+    @* </table>*@
+</script>
+
+<script type="text/html" id="TemplateB">
+    @* <table>*@
+    <tr>
+        <td style="width: 60%"> <span data-bind="text:ProductFullName"></span></td>
+        <td style="width: 20%"> <input type="text" data-bind="value: $data.ProductCost" id="txtProductCost" class="form-control" style="width: 170px" /> </td>
+        <td style="width: 20%"></td>
+    </tr>
+    @* </table>*@
+</script>
+
+<script src="~/Scripts/ViewModels/SaleModalityProduct.js"></script>
