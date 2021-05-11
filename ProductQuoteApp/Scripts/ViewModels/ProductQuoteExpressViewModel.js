@@ -1473,8 +1473,6 @@
                     }
                 });
             }
-            else {
-            }
         }
 
         //function loadExchangeTypeList() {
@@ -1497,23 +1495,6 @@
         //        url: "/GetMaximumMonthsStock",
         //        type: "GET",
         //        success: function (resp) { self.maximumMonthsStockList(resp); },
-        //        error: function (xhr, ajaxOptions, thrownError) {
-        //        alert("Ha ocurrido un error, por favor intente mas tarde");
-        //        console.log(xhr);
-        //        console.log(ajaxOptions);
-        //        console.log(thrownError);
-        //    }
-                
-        //    });
-        //}
-
-        //function loadDeliveryAmountList() {
-        //    $.ajax({
-        //        url: "/GetDeliveryAmount",
-        //        type: "GET",
-        //        success: function (resp) {
-        //            self.deliveryAmountList(resp);
-        //        },
         //        error: function (xhr, ajaxOptions, thrownError) {
         //        alert("Ha ocurrido un error, por favor intente mas tarde");
         //        console.log(xhr);
